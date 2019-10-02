@@ -9,9 +9,12 @@ const links = [
 
 const Nav = () => (
   <nav>
-    <ul>
+    {/* <ul>
       <li>
-        <Link prefetch href="/">
+        <Link href="/home">
+          <a>Home</a>
+        </Link>
+        <Link href="/Home">
           <a>Home</a>
         </Link>
       </li>
@@ -26,9 +29,9 @@ const Nav = () => (
           )
         )}
       </ul>
-    </ul>
+    </ul> */}
 
-    <style jsx>{`
+    {/* <style jsx>{`
       :global(body) {
         margin: 0;
         font-family: -apple-system,BlinkMacSystemFont,Avenir Next,Avenir,Helvetica,sans-serif;
@@ -52,7 +55,7 @@ const Nav = () => (
         text-decoration: none;
         font-size: 13px;
       }
-    `}</style>
+    `}</style> */}
   </nav>
 )
 

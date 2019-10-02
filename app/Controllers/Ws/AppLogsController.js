@@ -6,18 +6,19 @@ class AppLogsController {
     this.request = request
   }
 
-  onAppLog(message) {
+  onMessage(message) {
     console.log(message)
-    this.socket.broadcastToAll('message', message)
+    this.socket.broadcastToAll('appLogs', message)
   }
 
-    onClose() {
-      // same as: socket.on('close')
-    }
+  onClose() {
+    console.log('close')
+  }
 
-    onError() {
-      // same as: socket.on('error')
-    }
+  onError() {
+    console.log('error')
+  }
+
 }
 
 module.exports = AppLogsController

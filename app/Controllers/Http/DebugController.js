@@ -4,10 +4,16 @@ const Ws = use('Ws')
 
 class DebugController {
   async create({request}){
-    const appLogsChannel = Ws.getChannel('appLogs')
-    console.log(appLogsChannel)
-    appLogsChannel.emit('onAppLog', 'Hello world')
-    return {ola: 'mundo'}
+    const {userId, debug} = request.post()
+    const appLogsChannel = Ws.getChannel('appLogs').topic('appLogs');
+    if(appLogsChannel){
+      appLogsChannel.broadcast('appLogs', {
+        userId,
+        debug,
+        time: new Date(),
+      })
+    }
+    return {success: true}
   }
 }
 

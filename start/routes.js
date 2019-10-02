@@ -17,7 +17,7 @@ const Route = use('Route');
 const Next = use('Adonis/Addons/Next');
 const handler = Next.getRequestHandler();
 
-Route.get('/api/log', 'DebugController.create');
+Route.post('/api/log', 'DebugController.create');
 
 // * Next Routes
 Route.get('/b', ({ request, response }) => {
