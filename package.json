@@ -8,7 +8,7 @@
     "dev": "nodemon --exec babel-node server.js",
     "build": "next build ./next",
     "export": "next export ./next",
-    "start": "adonis serve",
+    "start": "node serve",
     "test": "node ace test"
   },
   "keywords": [

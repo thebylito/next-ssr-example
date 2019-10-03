@@ -35,7 +35,7 @@ export default function HomePage() {
       <Head title="Home" />
       <Nav />
       <List>
-        {localState.feed.map((item) => <LogCard item={item} />)}
+        {localState.feed.map((item, i) => <LogCard item={item} key={`id-${i.toString()}`} />)}
       </List>
     </>
   );

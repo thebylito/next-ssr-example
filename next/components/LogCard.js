@@ -50,7 +50,7 @@ export default function LogCard({ item }) {
         primary={`${item.userId} - ${item.appName}`}
         secondary={(
           <>
-            <Button variant="clear" aria-describedby={id} onClick={handleClick}>
+            <Button variant="text" aria-describedby={id} onClick={handleClick}>
               {formatarData(item.time)}
             </Button>
             <Popover
