@@ -9,8 +9,7 @@
     "build": "next build ./next",
     "export": "next export ./next",
     "start": "node server.js",
-    "test": "node ace test",
-    "postinstall": "yarn build && yarn export"
+    "test": "node ace test"
   },
   "keywords": [
     "adonisjs",
