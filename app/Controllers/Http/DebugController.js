@@ -1,20 +1,23 @@
-'use strict'
 
-const Ws = use('Ws')
+const Ws = use('Ws');
 
 class DebugController {
-  async create({request}){
-    const {userId, debug} = request.post()
+  async create({ request }) {
+    const {
+      userId, debug, appName, type,
+    } = request.post();
     const appLogsChannel = Ws.getChannel('appLogs').topic('appLogs');
-    if(appLogsChannel){
+    if (appLogsChannel) {
       appLogsChannel.broadcast('appLogs', {
         userId,
         debug,
         time: new Date(),
-      })
+        appName,
+        type,
+      });
     }
-    return {success: true}
+    return { success: true };
   }
 }
 
-module.exports = DebugController
+module.exports = DebugController;
