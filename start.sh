@@ -1,3 +1,3 @@
 yarn build
-yarn export
+yarn exports
 node server.js

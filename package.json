@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon --exec babel-node server.js",
     "build": "next build ./next",
-    "export": "next export ./next",
+    "exports": "next export ./next",
     "start": "node server.js",
     "test": "node ace test"
   },
