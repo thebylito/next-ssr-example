@@ -8,7 +8,7 @@
     "dev": "nodemon --exec babel-node server.js",
     "build": "next build ./next",
     "export": "next export ./next",
-    "start": "node serve",
+    "start": "node server.js",
     "test": "node ace test"
   },
   "keywords": [
