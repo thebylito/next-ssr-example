@@ -1,4 +1,15 @@
 {
  "schemaVersion" :2 ,
- "templateId" :"node/11.0.0"
+ "dockerfileLines": [
+                      "FROM node:10",
+                      "RUN mkdir -p /usr/src/app",
+                      "WORKDIR /usr/src/app",
+                      "COPY ./package.json /usr/src/app/",
+                      "RUN yarn install && yarn cache clean --force && yarn build && yarn export",
+                      "COPY ./ /usr/src/app",
+                      "ENV NODE_ENV production",
+                      "ENV PORT 80",
+                      "EXPOSE 80",
+                      "CMD [ \"yarn\", \"start\" ]"
+                  ]
 }
