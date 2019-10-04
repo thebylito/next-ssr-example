@@ -1,62 +1,58 @@
-import Link from 'next/link'
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DoneIcon from '@material-ui/icons/Done';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { lighten, makeStyles, withStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 
-const links = [
-  { href: 'https://github.com/segmentio/create-next-app', label: 'Github' }
-].map(link => {
-  link.key = `nav-link-${link.href}-${link.label}`
-  return link
-})
 
-const Nav = () => (
-  <nav>
-    {/* <ul>
-      <li>
-        <Link href="/home">
-          <a>Home</a>
-        </Link>
-        <Link href="/Home">
-          <a>Home</a>
-        </Link>
-      </li>
-      <ul>
-        {links.map(
-          ({ key, href, label }) => (
-            <li key={key}>
-              <Link href={href}>
-                <a>{label}</a>
-              </Link>
-            </li>
-          )
-        )}
-      </ul>
-    </ul> */}
+// import Link from 'next/link'
 
-    {/* <style jsx>{`
-      :global(body) {
-        margin: 0;
-        font-family: -apple-system,BlinkMacSystemFont,Avenir Next,Avenir,Helvetica,sans-serif;
-      }
-      nav {
-        text-align: center;
-      }
-      ul {
-        display: flex;
-        justify-content: space-between;
-      }
-      nav > ul {
-        padding: 4px 16px;
-      }
-      li {
-        display: flex;
-        padding: 6px 8px;
-      }
-      a {
-        color: #067df7;
-        text-decoration: none;
-        font-size: 13px;
-      }
-    `}</style> */}
-  </nav>
-)
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
-export default Nav
+const ColorCircularProgress = withStyles({
+  root: {
+    color: '#fff',
+  },
+})(CircularProgress);
+
+const Nav = ({ isLoading = null }) => {
+  const classes = useStyles();
+  return (
+    <>
+      <CssBaseline />
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            Logger realtime
+          </Typography>
+          {isLoading !== null && (
+            <>
+              {isLoading ? (
+                <ColorCircularProgress size={30} thickness={5} />
+              ) : (
+                <DoneIcon style={{ fontSize: 30 }} />
+              )}
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
+export default Nav;
