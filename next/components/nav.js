@@ -3,11 +3,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import DoneIcon from '@material-ui/icons/Done';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { lighten, makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
+import Link from './Link';
 
 
 // import Link from 'next/link'
@@ -38,8 +38,17 @@ const Nav = ({ isLoading = null }) => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Logger realtime
+            <Link as="/" href="/">
+              <Button style={{ color: '#fff', marginRight: 20 }} disableRipple disableFocusRipple variant="text">
+                Logger realtime
+              </Button>
+            </Link>
           </Typography>
+          <Link as="manual" href="manual">
+            <Button style={{ color: '#fff', marginRight: 20 }}>
+            Manual
+            </Button>
+          </Link>
           {isLoading !== null && (
             <>
               {isLoading ? (
