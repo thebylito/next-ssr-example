@@ -71,12 +71,14 @@ export default function ManualPage() {
             component="pre"
             style={{
               backgroundColor: '#f2f2f2',
+              overflow: 'scroll',
+              padding: 15,
             }}
-            text
+
           >
             {`
             const logInfo = async (usuario, dados) => {
-              const request = await fetch('http://localhost:3333/api/log',{
+              const request = await fetch('http://localhost:3333/api/log', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
@@ -99,6 +101,8 @@ export default function ManualPage() {
             component="pre"
             style={{
               backgroundColor: '#f2f2f2',
+              overflow: 'scroll',
+              padding: 15,
             }}
           >
             {`
