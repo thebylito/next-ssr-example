@@ -72,6 +72,7 @@ export default function ManualPage() {
             style={{
               backgroundColor: '#f2f2f2',
             }}
+            text
           >
             {`
             const logInfo = async (usuario, dados) => {

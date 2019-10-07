@@ -8,6 +8,7 @@ module.exports = {
         "extensions": [".js", ".jsx"]
       }],
       "class-methods-use-this": 0,
+      "react/jsx-props-no-spreading": 0
     },
     globals: {
       use: true
