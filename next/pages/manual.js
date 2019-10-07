@@ -78,7 +78,7 @@ export default function ManualPage() {
           >
             {`
             const logInfo = async (usuario, dados) => {
-              const request = await fetch('http://localhost:3333/api/log', {
+              const request = await fetch('http://applogs.appdev.sanesul.ms.gov.br/api/log', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
@@ -121,7 +121,7 @@ export default function ManualPage() {
                         };
                         HttpClient client = new HttpClient();
                         var content = new FormUrlEncodedContent(values);
-                        var response = await client.PostAsync("http://localhost:3333/api/log", content);
+                        var response = await client.PostAsync("http://applogs.appdev.sanesul.ms.gov.br/api/log", content);
                         var responseString = await response.Content.ReadAsStringAsync();
                     }
                 }
