@@ -38,6 +38,7 @@
     "@material-ui/styles": "^4.5.0",
     "adonis-nextjs": "^3.1.1",
     "adonis-websocket-client": "^1.0.2",
+    "apisauce": "^1.1.1",
     "clsx": "^1.0.4",
     "cross-env": "^6.0.3",
     "formik": "^1.5.8",
@@ -48,6 +49,8 @@
     "react-redux": "^7.1.1",
     "react-swipeable-views": "^0.13.3",
     "redux": "^4.0.4",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.1",
     "yup": "^0.27.0"
   },
   "devDependencies": {
