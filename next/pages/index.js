@@ -1,54 +1,50 @@
 import React from 'react';
-import List from '@material-ui/core/List';
-import { useDispatch } from 'react-redux';
-import Nav from '../components/nav';
+// import { useDispatch } from 'react-redux';
+// import Nav from '../components/nav';
+import { Typography, Box, Card } from '@material-ui/core';
 import Head from '../components/head';
-import LogCard from '../components/LogCard';
 
 
 import { withRedux } from '../lib/redux';
+import SanesulLogo from '../components/SanesulLogo/index.js';
+import LoginForm from '../components/pages/index/LoginForm';
 // import useInterval from '../lib/useInterval';
 
 
 function HomePage() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-
-  const [socket, setSocket] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(true);
 
   const [localState, setLocalState] = React.useState({
     feed: [],
   });
 
-  const handleMessageAdd = (message) => {
-    // socket.emit('message', 'aaaaaaaaaaaaaaaa')
-    setLocalState((oldState) => ({
-      feed: [message, ...oldState.feed],
-    }));
-  };
 
-  React.useEffect(() => {
-    const Connection = require('../lib/socket').default;
-    const init = new Connection('appLogs').connect();
-    setSocket(init);
-    const subscribe = init.subscribe('appLogs');
-    subscribe.on('ready', () => setIsLoading(false));
-    subscribe.on('close', () => setIsLoading(null));
-    subscribe.on('appLogs', handleMessageAdd);
-    return () => {
-      if (socket) {
-        socket.close();
-      }
-    };
-  }, []);
   return (
     <>
       <Head title="Home" />
-      <Nav isLoading={isLoading} />
-      <List>
-        {localState.feed.map((item, i) => <LogCard item={item} key={`id-${i.toString()}`} />)}
-      </List>
+      <main style={{
+        display: 'flex',
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+        flexDirection: 'column',
+      }}
+      >
+        <div style={{
+          margin: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+        >
+          <SanesulLogo />
+          <Typography variant="h6" color="primary">Meu RH</Typography>
+        </div>
+        <Card style={{ padding: 20, margin: 20 }}>
+          <LoginForm />
+        </Card>
+      </main>
     </>
   );
 }
