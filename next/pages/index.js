@@ -1,24 +1,27 @@
 import React from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import Nav from '../components/nav';
-import { Typography, Box, Card } from '@material-ui/core';
+import { Typography, Card } from '@material-ui/core';
 import Head from '../components/head';
 
 
 import { withRedux } from '../lib/redux';
-import SanesulLogo from '../components/SanesulLogo/index.js';
+import SanesulLogo from '../components/SanesulLogo';
 import LoginForm from '../components/pages/index/LoginForm';
+import { Creators as AuthCreators } from '../appStore/ducks/auth';
+
 // import useInterval from '../lib/useInterval';
 
 
-function HomePage() {
+function LoginScreen() {
   // const dispatch = useDispatch();
 
 
-  const [localState, setLocalState] = React.useState({
-    feed: [],
-  });
+  const dispatch = useDispatch();
 
+  const onSubmit = ({ matricula, senha }) => {
+    dispatch(AuthCreators.getLoginRequest({ login: matricula, senha }));
+  };
 
   return (
     <>
@@ -42,14 +45,14 @@ function HomePage() {
           <Typography variant="h6" color="primary">Meu RH</Typography>
         </div>
         <Card style={{ padding: 20, margin: 20 }}>
-          <LoginForm />
+          <LoginForm onSubmit={onSubmit} />
         </Card>
       </main>
     </>
   );
 }
 
-HomePage.getInitialProps = ({ reduxStore }) => {
+LoginScreen.getInitialProps = ({ reduxStore }) => {
   // Tick the time once, so we'll have a
   // valid time before first render
   const { dispatch } = reduxStore;
@@ -62,4 +65,4 @@ HomePage.getInitialProps = ({ reduxStore }) => {
   return {};
 };
 
-export default withRedux(HomePage);
+export default withRedux(LoginScreen);
