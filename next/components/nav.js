@@ -30,33 +30,26 @@ const ColorCircularProgress = withStyles({
   },
 })(CircularProgress);
 
-const Nav = ({ isLoading = null }) => {
+const Nav = ({ exibirBotoes = true }) => {
   const classes = useStyles();
   return (
     <>
       <CssBaseline />
-      <AppBar position="static">
+      <AppBar position="fixed" style={{ marginBottom: 50 }}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Link as="/" href="/">
               <Button style={{ color: '#fff', marginRight: 20 }} disableRipple disableFocusRipple variant="text">
-                Logger realtime
+                Meu RH
               </Button>
             </Link>
           </Typography>
+          {exibirBotoes && (
           <Link as="manual" href="manual">
-            <Button style={{ color: '#fff', marginRight: 20 }}>
-            Manual
+            <Button style={{ color: '#fff' }}>
+              Sair
             </Button>
           </Link>
-          {isLoading !== null && (
-            <>
-              {isLoading ? (
-                <ColorCircularProgress size={30} thickness={5} />
-              ) : (
-                <DoneIcon style={{ fontSize: 30 }} />
-              )}
-            </>
           )}
         </Toolbar>
       </AppBar>
