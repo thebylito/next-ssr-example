@@ -25,7 +25,7 @@ function LoginScreen() {
 
   return (
     <>
-      <Head title="Home" />
+      <Head title="Acessar - Meu RH" />
       <main style={{
         display: 'flex',
         flex: 1,
