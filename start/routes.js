@@ -1,4 +1,3 @@
-'use strict';
 
 /*
 |--------------------------------------------------------------------------
@@ -20,23 +19,22 @@ const handler = Next.getRequestHandler();
 Route.post('/api/log', 'DebugController.create');
 
 // * Next Routes
-Route.get('/b', ({ request, response }) => {
+Route.get('/pagamentos/detalhe', ({ request, response }) => {
   const query = request.get();
-  return Next.render(request.request, response.response, '/b', query);
+  // return query;
+  console.log(query);
+  return Next.render(request.request, response.response, '/pagamentos/detalhes', query);
 });
 
-Route.get('/post/:id', ({ request, response, params }) =>
-  Next.render(request.request, response.response, '/b', {
-    id: params.id
-  })
-);
+Route.get('/post/:id', ({ request, response, params }) => Next.render(request.request, response.response, '/b', {
+  id: params.id,
+}));
 
 Route.get(
   '*',
-  ({ request, response }) =>
-    new Promise((resolve, reject) => {
-      handler(request.request, response.response, promise => {
-        promise.then(resolve).catch(reject);
-      });
-    })
+  ({ request, response }) => new Promise((resolve, reject) => {
+    handler(request.request, response.response, promise => {
+      promise.then(resolve).catch(reject);
+    });
+  }),
 );

@@ -93,9 +93,13 @@ export default function (state = initialState, action) {
 }
 
 export const Creators = {
-  getRequest: ({ mes, ano, pagamentoId = 0 }) => ({
+  getRequest: ({
+    mes, ano, roteiro, semana,
+  }) => ({
     type: Types.GET_REQUEST,
-    payload: { mes, ano, pagamentoId },
+    payload: {
+      mes, ano, roteiro, semana,
+    },
   }),
   getSuccess: ({ data }) => ({
     type: Types.GET_SUCCESS,
@@ -118,8 +122,8 @@ export const Creators = {
     payload: error,
   }),
   getPagamentoDownloadRequest: ({
- mes, ano, matricula, semana, roteiro
-}) => ({
+    mes, ano, matricula, semana, roteiro,
+  }) => ({
     type: Types.GET_PAGAMENTO_DOWNLOAD_REQUEST,
     payload: {
       mes,

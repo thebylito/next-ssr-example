@@ -1,4 +1,4 @@
-'use strict';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ const providers = [
   '@adonisjs/mail/providers/MailProvider',
   '@adonisjs/drive/providers/DriveProvider',
   'adonis-nextjs/providers/NextProvider',
-  '@adonisjs/websocket/providers/WsProvider'
+  '@adonisjs/websocket/providers/WsProvider',
 ];
 
 /*
@@ -57,4 +57,6 @@ const aliases = {};
 */
 const commands = [];
 
-module.exports = { providers, aceProviders, aliases, commands };
+module.exports = {
+ providers, aceProviders, aliases, commands 
+};

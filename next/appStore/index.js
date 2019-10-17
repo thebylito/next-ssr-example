@@ -6,19 +6,19 @@ import storage from 'redux-persist/lib/storage';
 
 import { persistStore, persistReducer } from 'redux-persist';
 import reducers from './ducks';
-import rootSaga from './sagas'; // defaults to localStorage for web
+import rootSaga from './sagas';
+import { authMiddleware } from './middlewares'; // defaults to localStorage for web
 
 const persistConfig = {
   key: 'root',
   storage,
   whitelist: ['auth'],
 };
-// import { authMiddleware } from './middlewares';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const persistedReducer = persistReducer(persistConfig, reducers);
-const middlewares = [sagaMiddleware];
+const middlewares = [sagaMiddleware, authMiddleware];
 
 export default () => {
   const store = createStore(

@@ -10,11 +10,12 @@ import {
 
 function* getPagamento({ payload }) {
   try {
-    const { mes, ano, pagamentoId } = payload;
+    const {
+      mes, ano, roteiro, semana,
+    } = payload;
     const response = yield call(api.get, 'usuario/pagamento', {
-      mes,
-      ano,
-      pagamentoId,
+      mes, ano, roteiro, semana,
+
     });
     if (response.status !== 200) {
       throw new Error(response);
