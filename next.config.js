@@ -1,7 +1,11 @@
-'use strict';
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-param-reassign */
+const path = require('path');
 
-const next = require('next');
-
-// next.config.js
 module.exports = {
+  webpack(config, options) {
+    config.resolve.alias.services = path.join(__dirname, 'next/services');
+    config.resolve.alias.appStore = path.join(__dirname, 'next/appStore');
+    return config;
+  },
 };

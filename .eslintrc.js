@@ -12,5 +12,13 @@ module.exports = {
     },
     globals: {
       use: true
-    }
+    },
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "paths": ["next"],
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      },
+    },
 };
