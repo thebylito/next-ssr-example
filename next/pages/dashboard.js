@@ -1,7 +1,10 @@
 import React from 'react';
 // import { useTheme } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
-import { Avatar, Grid, Card } from '@material-ui/core';
+import {
+  Avatar, Grid, Card, Typography, Box, Button,
+} from '@material-ui/core';
+import Router from 'next/router';
 import Head from '../components/head';
 import Nav from '../components/nav';
 import { withRedux } from '../lib/redux';
@@ -17,10 +20,15 @@ function Dashboard() {
 
   // console.log({ store, props });
 
+  const onPressVerTudo = () => {
+    Router.push({
+      pathname: '/perfil',
+    });
+  };
 
   return (
     <>
-      <Head title="Manual" />
+      <Head title="Página Inicial" />
       <Nav />
       <Grid
         container
@@ -30,6 +38,7 @@ function Dashboard() {
         style={{
           backgroundColor: '#1c9aba',
           height: '100vh',
+          paddingTop: 56,
         }}
       >
         <Avatar
@@ -37,6 +46,7 @@ function Dashboard() {
           style={{
             width: 100,
             height: 100,
+            transform: 'translateY(50px)',
             // margin: 20,
           }}
           src={`${apiUrl}Usuario/foto/?login=${data.loginDeRede}&cache=${new Date().getTime()}`}
@@ -44,36 +54,27 @@ function Dashboard() {
         <Card style={{
           margin: '0 15px',
           padding: 20,
+          paddingTop: 50,
         }}
         >
-          <div
+          <Box
             style={{
               alignSelf: 'center',
               alignItems: 'center',
               padding: 2,
             }}
           >
-            <span
-              style={{
-                textTransform: 'uppercase',
-                fontWeight: '600',
-                fontSize: 20,
-                marginTop: 5,
-                textAlign: 'center',
-              }}
-            >
+            <Typography align="center" variant="h6">
               {data.nome}
-            </span>
-            <span
-              style={{
-                textTransform: 'uppercase',
-                color: '#384b57',
-                fontSize: 20,
-              }}
+            </Typography>
+            <Typography
+              align="center"
+              variant="caption"
+              component="div"
             >
               {data.funcao}
-            </span>
-          </div>
+            </Typography>
+          </Box>
           <div style={{ flexDirection: 'row', marginTop: 10, marginHorizontal: 10 }}>
             <div style={{ flex: 1 }}>
               <ProfileDescriptionItem label="Email" value={data.email} />
@@ -81,11 +82,15 @@ function Dashboard() {
               <ProfileDescriptionItem label="Gerência" value={data.gerencia} />
             </div>
           </div>
-          {/* <Button
-            title="Ver tudo"
-            onPress={onPressGoProfileDetailsButton}
-            containerStyle={{ marginTop: 15 }}
-          /> */}
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            style={{ marginTop: 15 }}
+            onClick={onPressVerTudo}
+          >
+            <Typography>Ver tudo</Typography>
+          </Button>
         </Card>
       </Grid>
     </>
