@@ -20,7 +20,7 @@ const getOrInitializeStore = initialState => {
   return reduxStore;
 };
 
-export const withRedux = (PageComponent, { ssr = true } = {}) => {
+const withRedux = (PageComponent, { ssr = true } = {}) => {
   const WithRedux = ({ initialReduxState, ...props }) => {
     const { store, persistor } = getOrInitializeStore(initialReduxState);
     return (

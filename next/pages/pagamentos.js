@@ -1,15 +1,15 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  Grid, List, NoSsr, CircularProgress, LinearProgress,
+  Grid, List, LinearProgress,
 } from '@material-ui/core';
 import useInfiniteScroll from 'hooks/useInfiniteScroll';
 import { Creators as PagamentoCreators } from 'appStore/ducks/pagamento';
 import ListItemPagamento from 'components/pages/pagamento/ListItemPagamento';
 import Router from 'next/router';
-import Head from '../components/head';
-import Nav from '../components/nav';
-import { withRedux } from '../lib/redux';
+import withRedux from 'lib/redux';
+import Head from 'components/head';
+import Nav from 'components/nav';
 
 
 function Pagamentos() {
@@ -68,9 +68,15 @@ function Pagamentos() {
 
         }}
       >
+        {pagamentosLoading && <LinearProgress color="primary" />}
         <Grid>
           <List>
-            {pagamentos.map(listItem => <ListItemPagamento dados={listItem} onPressItem={onPressItem} />)}
+            {pagamentos.map(listItem => (
+              <ListItemPagamento
+                dados={listItem}
+                onPressItem={onPressItem}
+              />
+            ))}
           </List>
         </Grid>
 

@@ -2,23 +2,18 @@ import React from 'react';
 // import { useTheme } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import {
-  Avatar, Grid, Card, Typography, Box, Button, ListItem, List, ListItemText, ButtonGroup,
+  Grid, Typography, Button, List, ButtonGroup,
 } from '@material-ui/core';
-import Head from '../components/head';
-import Nav from '../components/nav';
-import { withRedux } from '../lib/redux';
-import { apiUrl } from '../services/api';
-import ProfileDescriptionItem from '../components/pages/dashboard/ProfileDescriptionItem';
+import Head from 'components/head';
+import Nav from 'components/nav';
+import withRedux from 'lib/redux';
+
 import ListItemProfile from '../components/pages/perfil/ListItemProfile';
 
 
 function Perfil() {
-  // const theme = useTheme();
   const [selectedTab, setSelectedTab] = React.useState(0);
-
   const { data: userData } = useSelector(state => state.auth);
-
-  // console.log({ store, props });
 
   const onChangeTab = (index) => () => setSelectedTab(index);
 
@@ -27,7 +22,6 @@ function Perfil() {
       <Head title="Meu Perfil" />
       <Nav>
         <ButtonGroup
-          // size="large"
           fullWidth
           aria-label="small outlined button group"
           style={{
@@ -90,20 +84,5 @@ function Perfil() {
     </>
   );
 }
-
-Perfil.getInitialProps = ({ reduxStore }) => {
-  // Tick the time once, so we'll have a
-  // valid time before first render
-  const { dispatch } = reduxStore;
-
-  const hue = reduxStore;
-  // dispatch({
-  //   type: 'TICK',
-  //   light: typeof window === 'object',
-  //   lastUpdate: Date.now(),
-  // });
-
-  return { dispatch };
-};
 
 export default withRedux(Perfil);

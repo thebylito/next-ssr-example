@@ -1,14 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-// import Nav from '../components/nav';
 import { Typography, Card } from '@material-ui/core';
-import Head from '../components/head';
+import Head from 'components/head';
 
 
-import { withRedux } from '../lib/redux';
-import SanesulLogo from '../components/SanesulLogo';
-import LoginForm from '../components/pages/index/LoginForm';
-import { Creators as AuthCreators } from '../appStore/ducks/auth';
+import SanesulLogo from 'components/SanesulLogo';
+import LoginForm from 'components/pages/index/LoginForm';
+import { Creators as AuthCreators } from 'appStore/ducks/auth';
+import withRedux from 'lib/redux';
 
 // import useInterval from '../lib/useInterval';
 
