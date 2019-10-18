@@ -1,22 +1,45 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Typography, Card } from '@material-ui/core';
+import { Typography, Card, Box } from '@material-ui/core';
 import Head from 'components/head';
-
-
 import SanesulLogo from 'components/SanesulLogo';
 import LoginForm from 'components/pages/index/LoginForm';
 import { Creators as AuthCreators } from 'appStore/ducks/auth';
 import withRedux from 'lib/redux';
+import { makeStyles } from '@material-ui/styles';
 
-// import useInterval from '../lib/useInterval';
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  logoContainer: {
+    margin: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  loginForm: {
+    padding: '50px 20px',
+    [theme.breakpoints.down('md')]: {
+      width: '25vw',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '40vw',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '90vw',
+    },
+  },
+}));
 
 
 function LoginScreen() {
-  // const dispatch = useDispatch();
-
-
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const onSubmit = ({ matricula, senha }) => {
     dispatch(AuthCreators.getLoginRequest({ login: matricula, senha }));
@@ -25,43 +48,34 @@ function LoginScreen() {
   return (
     <>
       <Head title="Acessar - Meu RH" />
-      <main style={{
-        display: 'flex',
-        flex: 1,
-        justifyContent: 'center',
-        alignContent: 'center',
-        flexDirection: 'column',
-      }}
-      >
-        <div style={{
-          margin: 20,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-        >
-          <SanesulLogo />
-          <Typography variant="h6" color="primary">Meu RH</Typography>
-        </div>
-        <Card style={{ padding: 20, margin: 20 }}>
-          <LoginForm onSubmit={onSubmit} />
-        </Card>
+
+      <main className={classes.root}>
+        <style jsx global>
+          {`
+        body {
+          position: absolute;
+          background-color: #1f96b7;
+          background-size: contain;
+          min-height: 100%;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+    `}
+        </style>
+        <Box className={classes.container}>
+          <Box className={classes.logoContainer}>
+            <SanesulLogo style={{ width: 109, height: 150 }} />
+            <Typography style={{ color: 'white' }} variant="h5" color="primary">Meu RH</Typography>
+          </Box>
+          <Card className={classes.loginForm}>
+            <LoginForm onSubmit={onSubmit} />
+          </Card>
+        </Box>
       </main>
     </>
   );
 }
-
-LoginScreen.getInitialProps = ({ reduxStore }) => {
-  // Tick the time once, so we'll have a
-  // valid time before first render
-  const { dispatch } = reduxStore;
-  // dispatch({
-  //   type: 'TICK',
-  //   light: typeof window === 'object',
-  //   lastUpdate: Date.now(),
-  // });
-
-  return {};
-};
 
 export default withRedux(LoginScreen);

@@ -28,11 +28,12 @@ function Dashboard() {
         container
         justify="center"
         alignItems="center"
-        alignContent="flex-start"
+        alignContent="center"
         style={{
           backgroundColor: '#1c9aba',
           height: '100vh',
           paddingTop: 56,
+          flexDirection: 'column',
         }}
       >
         <div style={{

@@ -15,10 +15,10 @@ const CustomTextField = ({
     <TextField
       {...field}
       {...props}
-      placeholder={label}
+      label={label}
       error={Boolean(touched[field.name] && errors[field.name])}
+      variant="standard"
       fullWidth
-      variant="outlined"
     />
     <ErrorMessage name={field.name}>
       {msg => <FormHelperText error>{msg}</FormHelperText>}
