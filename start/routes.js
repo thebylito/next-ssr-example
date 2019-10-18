@@ -19,16 +19,16 @@ const handler = Next.getRequestHandler();
 Route.post('/api/log', 'DebugController.create');
 
 // * Next Routes
-Route.get('/pagamentos/detalhe', ({ request, response }) => {
-  const query = request.get();
-  // return query;
-  console.log(query);
-  return Next.render(request.request, response.response, '/pagamentos/detalhes', query);
-});
+// Route.get('/pagamentos/detalhes', ({ request, response }) => {
+//   const query = request.get();
+//   console.log(query);
+//   // return query;
+//   return Next.render(request.request, response.response, '/pagamentos/detalhes.server', { ola: 'Mundo' });
+// });
 
-Route.get('/post/:id', ({ request, response, params }) => Next.render(request.request, response.response, '/b', {
-  id: params.id,
-}));
+// Route.get('/post/:id', ({ request, response, params }) => Next.render(request.request, response.response, '/b', {
+//   id: params.id,
+// }));
 
 Route.get(
   '*',

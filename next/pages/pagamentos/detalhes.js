@@ -8,9 +8,11 @@ import {
 } from '@material-ui/core';
 import { withRedux } from 'lib/redux';
 import { Creators as PagamentoCreators } from 'appStore/ducks/pagamento';
+import DetalhesCard from 'components/pages/pagamento/DetalhesCard';
 
-function Detalhes(props) {
+function Detalhes() {
   const dispatch = useDispatch();
+  const { pagamento } = useSelector(state => state.pagamento);
   const router = useRouter();
   const {
     mes, ano, roteiro, semana,
@@ -22,8 +24,6 @@ function Detalhes(props) {
     }));
   }, []);
 
-  console.log({ props });
-
   return (
     <>
       <Head title="Meus Detalhes" />
@@ -31,18 +31,39 @@ function Detalhes(props) {
       <Grid
         container
         direction="column"
-        // alignContent="flex-start"
         style={{
           paddingTop: 56,
-
         }}
       >
-        OLAAA
+        {pagamento && Object.keys(pagamento).length > 0 && pagamento.totalProventos !== 0 && (
+          <>
+            <DetalhesCard
+              label="Proventos"
+              value={pagamento.totalProventos}
+              subItems={pagamento.proventos}
+              ehDesconto={false}
+            />
+            <DetalhesCard
+              label="Descontos"
+              value={pagamento.totalDescontos}
+              subItems={pagamento.descontos}
+            />
+            <DetalhesCard
+              label="Líquido"
+              value={pagamento.totalLiquido}
+              ehDesconto={false}
+            />
+            <DetalhesCard label="Bases" subItems={pagamento.bases} />
+
+          </>
+        )}
       </Grid>
     </>
   );
 }
 
-Detalhes.getInitialProps = (aaa) => ({ aaa });
-
+Detalhes.getInitialProps = ({ query }) => {
+  console.log(query);
+  return { query };
+};
 export default withRedux(Detalhes);

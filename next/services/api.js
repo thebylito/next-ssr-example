@@ -1,6 +1,6 @@
 import { create } from 'apisauce';
 
-export const apiUrl = 'http://localhost:30000/api/';
+export const apiUrl = 'http://meurh.sanesul.ms.gov.br/api/';
 
 const api = create({
   baseURL: apiUrl,

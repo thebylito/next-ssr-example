@@ -44,15 +44,15 @@ function Pagamentos() {
   }, []);
 
   const onPressItem = (dados) => () => {
-    // Router.push({
-    //   href: 'pagamentos/detalhes/',
-    //   query: {
-    //     mes: dados.mes,
-    //     ano: dados.ano,
-    //     roteiro: dados.roteiro,
-    //     semana: dados.semana,
-    //   },
-    // });
+    Router.push({
+      pathname: '/pagamentos/detalhes',
+      query: {
+        mes: dados.mes,
+        ano: dados.ano,
+        roteiro: dados.roteiro,
+        semana: dados.semana,
+      },
+    });
   };
 
   return (
