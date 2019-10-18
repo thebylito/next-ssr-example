@@ -1,24 +1,18 @@
 import React from 'react';
-// import { useTheme } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import {
-  Avatar, Grid, Card, Typography, Box, Button,
+  Grid, Card, Typography, Box, Button,
 } from '@material-ui/core';
 import Router from 'next/router';
-import Head from '../components/head';
-import Nav from '../components/nav';
-import { withRedux } from '../lib/redux';
-import { apiUrl } from '../services/api';
-import ProfileDescriptionItem from '../components/pages/dashboard/ProfileDescriptionItem';
+import UserAvatar from 'components/pages/dashboard/UserAvatar';
+import Head from 'components/head';
+import Nav from 'components/nav';
+import withRedux from 'lib/redux';
+import ProfileDescriptionItem from 'components/pages/dashboard/ProfileDescriptionItem';
 
 
 function Dashboard() {
-  // const theme = useTheme();
-  // const [value, setValue] = React.useState(0);
-
   const { data } = useSelector(state => state.auth);
-
-  // console.log({ store, props });
 
   const onPressVerTudo = () => {
     Router.push({
@@ -41,16 +35,12 @@ function Dashboard() {
           paddingTop: 56,
         }}
       >
-        <Avatar
-          alt={data.nome}
-          style={{
-            width: 100,
-            height: 100,
-            transform: 'translateY(50px)',
-            // margin: 20,
-          }}
-          src={`${apiUrl}Usuario/foto/?login=${data.loginDeRede}&cache=${new Date().getTime()}`}
-        />
+        <div style={{
+          transform: 'translateY(50px)',
+        }}
+        >
+          <UserAvatar />
+        </div>
         <Card style={{
           margin: '0 15px',
           padding: 20,
