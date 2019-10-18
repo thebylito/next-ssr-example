@@ -4,15 +4,15 @@ import Nav from 'components/nav';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import {
-  Grid,
+  Grid, LinearProgress, Typography,
 } from '@material-ui/core';
-import { withRedux } from 'lib/redux';
+import withRedux from 'lib/redux';
 import { Creators as PagamentoCreators } from 'appStore/ducks/pagamento';
 import DetalhesCard from 'components/pages/pagamento/DetalhesCard';
 
 function Detalhes() {
   const dispatch = useDispatch();
-  const { pagamento } = useSelector(state => state.pagamento);
+  const { pagamento, pagamentoLoading } = useSelector(state => state.pagamento);
   const router = useRouter();
   const {
     mes, ano, roteiro, semana,
@@ -27,7 +27,11 @@ function Detalhes() {
   return (
     <>
       <Head title="Meus Detalhes" />
-      <Nav />
+      <Nav>
+        <Typography align="center">
+          {`Período: ${mes}/${ano}`}
+        </Typography>
+      </Nav>
       <Grid
         container
         direction="column"
@@ -35,6 +39,7 @@ function Detalhes() {
           paddingTop: 56,
         }}
       >
+        {pagamentoLoading && <LinearProgress color="primary" />}
         {pagamento && Object.keys(pagamento).length > 0 && pagamento.totalProventos !== 0 && (
           <>
             <DetalhesCard
@@ -48,12 +53,12 @@ function Detalhes() {
               value={pagamento.totalDescontos}
               subItems={pagamento.descontos}
             />
+            <DetalhesCard label="Bases" subItems={pagamento.bases} />
             <DetalhesCard
               label="Líquido"
               value={pagamento.totalLiquido}
               ehDesconto={false}
             />
-            <DetalhesCard label="Bases" subItems={pagamento.bases} />
 
           </>
         )}
