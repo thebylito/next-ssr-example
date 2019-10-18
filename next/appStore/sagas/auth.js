@@ -41,7 +41,9 @@ function* getLogin({ payload }) {
 }
 
 function* getLogout() {
-  // yield call(goToLoginScreen);
+  yield call(Router.push, {
+    pathname: '/',
+  });
 }
 
 export default function* AuthSagas() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -8,11 +9,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import Router from 'next/router';
+import { Creators } from 'appStore/ducks/auth';
 
 const home = {
   id: 'home',
@@ -39,7 +42,15 @@ const pages = [
 
 const useStyles = makeStyles({
   list: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
     width: 250,
+  },
+  listMenus: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
   },
   fullList: {
     width: 'auto',
@@ -48,6 +59,7 @@ const useStyles = makeStyles({
 
 export default function SideDrawer() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [state, setState] = React.useState({
     left: false,
   });
@@ -66,6 +78,10 @@ export default function SideDrawer() {
     });
   };
 
+  const onLogout = () => {
+    dispatch(Creators.getLogoutRequest());
+  };
+
   const sideList = side => (
     <div
       className={classes.list}
@@ -80,7 +96,7 @@ export default function SideDrawer() {
         </ListItem>
       </List>
       <Divider />
-      <List>
+      <List className={classes.listMenus}>
         {pages.map((menu) => (
           <ListItem button key={menu.id} onClick={onLinkPress(menu.path)}>
             <ListItemIcon>{menu.icon}</ListItemIcon>
@@ -88,6 +104,11 @@ export default function SideDrawer() {
           </ListItem>
         ))}
       </List>
+      <Divider />
+      <ListItem button onClick={onLogout}>
+        <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+        <ListItemText primary="Sair" />
+      </ListItem>
     </div>
   );
 
