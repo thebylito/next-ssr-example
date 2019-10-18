@@ -23,12 +23,9 @@ Route.post('/api/log', 'DebugController.create');
 //   const query = request.get();
 //   console.log(query);
 //   // return query;
-//   return Next.render(request.request, response.response, '/pagamentos/detalhes.server', { ola: 'Mundo' });
+//   return Next.render(request.request, response.response,
+// '/pagamentos/detalhes.server', { ola: 'Mundo' });
 // });
-
-// Route.get('/post/:id', ({ request, response, params }) => Next.render(request.request, response.response, '/b', {
-//   id: params.id,
-// }));
 
 Route.get(
   '*',
