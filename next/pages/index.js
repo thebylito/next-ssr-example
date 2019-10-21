@@ -70,7 +70,7 @@ function LoginScreen() {
         </style>
         <Box className={classes.container}>
           <Box className={classes.logoContainer}>
-            <SanesulLogo style={{ width: 109, height: 150 }} />
+            <SanesulLogo width={109} height={150} />
             <Typography style={{ color: 'white' }} variant="h5" color="primary">Meu RH</Typography>
           </Box>
           <Card className={classes.loginForm}>

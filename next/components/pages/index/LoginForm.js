@@ -35,8 +35,7 @@ const LoginForm = ({ onSubmit, isLoading }) => (
             type="password"
           />
         </div>
-        <Button onClick={handleSubmit} style={{ marginTop: 15 }} color="primary" variant="contained">Entrar</Button>
-
+        <Button type="submit" onClick={handleSubmit} style={{ marginTop: 15 }} color="primary" variant="contained">Entrar</Button>
       </Form>
     )}
   </Formik>
