@@ -4,7 +4,7 @@ import Nav from 'components/nav';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import {
-  Grid, LinearProgress, Typography, Button, IconButton,
+  Grid, LinearProgress, Typography, Button,
 } from '@material-ui/core';
 import withRedux from 'lib/redux';
 import { Creators as PagamentoCreators } from 'appStore/ducks/pagamento';

@@ -23,14 +23,26 @@ function Dashboard() {
 
   return (
     <>
+      <style jsx global>
+        {`
+        body {
+          position: absolute;
+          background-color: #1f96b7;
+          background-size: contain;
+          min-height: 100%;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+    `}
+      </style>
       <Head title="Página Inicial" />
       <Nav />
       <Grid
         container
         alignItems="center"
         style={{
-          backgroundColor: '#1c9aba',
-          height: '100vh',
           paddingTop: 60,
           flexDirection: 'column',
         }}
