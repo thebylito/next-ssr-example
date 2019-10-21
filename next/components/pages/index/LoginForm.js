@@ -5,8 +5,8 @@ import { Button } from '@material-ui/core';
 import CustomTextField from '../../form/CustomTextField';
 
 const initialValues = {
-  matricula: '006084',
-  senha: '891044',
+  matricula: '',
+  senha: '',
 };
 
 const formSchema = Yup.object().shape({
