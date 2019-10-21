@@ -16,7 +16,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case Types.GET_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: null };
     case Types.GET_SUCCESS:
       return {
         data: action.payload.funcionario,
