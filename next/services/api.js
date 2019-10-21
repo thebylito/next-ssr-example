@@ -1,6 +1,6 @@
 import { create } from 'apisauce';
 
-export const apiUrl = 'http://localhost:30000/api/';
+export const apiUrl = process.env.NODE_ENV === 'production' ? 'http://meurh.sanesul.ms.gov.br' : 'http://localhost:30000/api/';
 
 const api = create({
   baseURL: apiUrl,
