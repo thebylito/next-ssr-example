@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Card, Box } from '@material-ui/core';
 import Head from 'components/head';
 import SanesulLogo from 'components/SanesulLogo';
@@ -24,11 +24,14 @@ const useStyles = makeStyles(theme => ({
   },
   loginForm: {
     padding: '50px 20px',
+    [theme.breakpoints.down('lg')]: {
+      width: '20vw',
+    },
     [theme.breakpoints.down('md')]: {
-      width: '25vw',
+      width: '30vw',
     },
     [theme.breakpoints.down('sm')]: {
-      width: '40vw',
+      width: '50vw',
     },
     [theme.breakpoints.down('xs')]: {
       width: '90vw',
@@ -38,6 +41,7 @@ const useStyles = makeStyles(theme => ({
 
 
 function LoginScreen() {
+  const authStore = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -71,6 +75,9 @@ function LoginScreen() {
           </Box>
           <Card className={classes.loginForm}>
             <LoginForm onSubmit={onSubmit} />
+            <Typography color="error" align="center">
+              {authStore.error}
+            </Typography>
           </Card>
         </Box>
       </main>
