@@ -4,11 +4,12 @@ import Nav from 'components/nav';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import {
-  Grid, LinearProgress, Typography,
+  Grid, LinearProgress, Typography, Button, IconButton,
 } from '@material-ui/core';
 import withRedux from 'lib/redux';
 import { Creators as PagamentoCreators } from 'appStore/ducks/pagamento';
 import DetalhesCard from 'components/pages/pagamento/DetalhesCard';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 
 function Detalhes() {
   const dispatch = useDispatch();
@@ -23,6 +24,15 @@ function Detalhes() {
       mes, ano, roteiro, semana,
     }));
   }, []);
+
+  const getPagamentoDownload = () => {
+    dispatch(PagamentoCreators.getPagamentoDownloadRequest({
+      ano,
+      mes,
+      roteiro,
+      semana,
+    }));
+  };
 
   return (
     <>
@@ -59,7 +69,14 @@ function Detalhes() {
               value={pagamento.totalLiquido}
               ehDesconto={false}
             />
-
+            <Button
+              variant="contained"
+              style={{ margin: 8 }}
+              color="primary"
+            >
+              <Typography style={{ marginRight: 10 }}>Gerar PDF</Typography>
+              <CloudDownloadIcon color="secondary" onClick={getPagamentoDownload} />
+            </Button>
           </>
         )}
       </Grid>

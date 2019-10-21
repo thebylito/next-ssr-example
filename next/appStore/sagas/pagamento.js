@@ -6,6 +6,8 @@ import {
   Creators as PagamentoCreators,
   Types as PagamentoTypes,
 } from 'appStore/ducks/pagamento';
+import axios from 'axios';
+import { apiUtils } from 'utils/apiUtils';
 
 
 function* getPagamento({ payload }) {
@@ -54,23 +56,26 @@ function* getListaPagamentos({ payload }) {
 
 function* getPagamentoDownload({ payload }) {
   try {
+    const { matricula } = yield select(state => state.auth.data);
     const {
-      mes, ano, matricula, semana, roteiro,
+      mes, ano, semana, roteiro,
     } = payload;
-    const path = `${apiUrl.replace('api/', '')}/Relatorios/ImprimeHolerite/`;
+    const path = `${apiUrl.replace('api/', '')}Relatorios/ImprimeHolerite/`;
 
-    // const request = yield call(
-    //   config.fetch,
-    //   'POST',
-    //   path,
-    //   {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //   },
-    //   `mes=${mes}&ano=${ano}&matricula=${matricula}&semana=${semana}&roteiro=${roteiro}`,
-    // );
+    const response = yield call(axios.post, path,
+      `mes=${mes}&ano=${ano}&matricula=${matricula}&semana=${semana}&roteiro=${roteiro}`,
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        responseType: 'blob',
+      });
+    // eslint-disable-next-line no-undef
+    const url = yield call(window.URL.createObjectURL, response.data);
+    // eslint-disable-next-line no-undef
+    yield call(window.open, url);
 
     yield put(PagamentoCreators.getPagamentoDownloadSuccess());
   } catch (e) {
+    yield apiUtils.sagaInterceptError(PagamentoCreators.getPagamentoDownloadFailure, e);
     // console.tron.log(e.toString());
     // yield sagaInterceptRequestError(PagamentoCreators.getPagamentoDownloadFailure, e);
   }

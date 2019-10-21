@@ -122,13 +122,12 @@ export const Creators = {
     payload: error,
   }),
   getPagamentoDownloadRequest: ({
-    mes, ano, matricula, semana, roteiro,
+    mes, ano, semana, roteiro,
   }) => ({
     type: Types.GET_PAGAMENTO_DOWNLOAD_REQUEST,
     payload: {
       mes,
       ano,
-      matricula,
       semana,
       roteiro,
     },
