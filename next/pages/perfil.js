@@ -24,9 +24,6 @@ function Perfil() {
         <ButtonGroup
           fullWidth
           aria-label="small outlined button group"
-          style={{
-            margin: '5px',
-          }}
         >
           <Button color="secondary" onClick={onChangeTab(0)} style={{ backgroundColor: selectedTab === 0 ? '#46b5d230' : '' }}>
           Pessoais

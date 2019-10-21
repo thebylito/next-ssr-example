@@ -1,7 +1,7 @@
 import {
   call, put, all, takeLatest, select,
 } from 'redux-saga/effects';
-import apiUtils from 'utils/apiUtils';
+import { apiUtils } from 'utils/apiUtils';
 import Router from 'next/router';
 
 // import { Creators as ProfileCreators } from '../ducks/perfil';

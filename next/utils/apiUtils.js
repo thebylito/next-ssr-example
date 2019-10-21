@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { put } from 'redux-saga/effects';
 
 const successResponseCodes = [
@@ -26,7 +27,7 @@ function* sagaInterceptError(creator, response) {
   yield put(creator('Houve um erro no servidor. Tente novamente em instantes'));
 }
 
-export default {
+export const apiUtils = {
   sagaInterceptError,
   sagaInterceptResponse,
 };

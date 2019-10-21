@@ -7,6 +7,7 @@ import {
   Types as RendimentoTypes,
 } from 'appStore/ducks/rendimento';
 import axios from 'axios';
+import { apiUtils } from 'utils/apiUtils';
 
 
 function* getListaRendimentos() {
@@ -28,26 +29,21 @@ function* getRendimentoDownload({ payload }) {
     const { matricula } = yield select(state => state.auth.data);
 
     const path = `${apiUrl.replace('api/', '')}Relatorios/ImprimeRendimentos/`;
-    const response = yield call(axios.post(path,
+
+    const response = yield call(axios.post, path,
       `ano=${ano}&matricula=${matricula}`,
       {
         'Content-Type': 'application/x-www-form-urlencoded',
-      }));
-    console.log(response);
-    const blob = new Blob([response.data], {
-      type: 'application/pdf',
-    });
-    console.log(blob);
-    const url = window.URL.createObjectURL(blob);
-    window.open(url);
+        responseType: 'blob', // had to add this one here
+      });
 
-    // yield call(window.open, path, '_newtab');
-
-
+    // eslint-disable-next-line no-undef
+    const url = yield call(window.URL.createObjectURL, response.data);
+    // eslint-disable-next-line no-undef
+    yield call(window.open, url);
     yield put(RendimentoCreators.getRendimentoDownloadSuccess());
   } catch (e) {
-    console.log(e);
-    // yield sagaInterceptRequestError(RendimentoCreators.getRendimentoDownloadFailure, e);
+    yield apiUtils.sagaInterceptError(RendimentoCreators.getRendimentoDownloadFailure, e);
   }
 }
 

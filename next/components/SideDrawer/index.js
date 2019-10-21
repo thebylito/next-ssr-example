@@ -114,7 +114,7 @@ export default function SideDrawer() {
 
   return (
     <div>
-      <IconButton onClick={toggleDrawer('left', true)}>
+      <IconButton style={{ padding: 0 }} onClick={toggleDrawer('left', true)}>
         <MenuIcon color="secondary" />
       </IconButton>
       <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
