@@ -9,6 +9,7 @@ import Head from 'components/head';
 import Nav from 'components/nav';
 import withRedux from 'lib/redux';
 import ProfileDescriptionItem from 'components/pages/dashboard/ProfileDescriptionItem';
+import SanesulLogo from 'components/SanesulLogo';
 
 
 function Dashboard() {
@@ -26,20 +27,16 @@ function Dashboard() {
       <Nav />
       <Grid
         container
-        justify="center"
         alignItems="center"
-        alignContent="center"
         style={{
           backgroundColor: '#1c9aba',
           height: '100vh',
-          paddingTop: 56,
+          paddingTop: 60,
           flexDirection: 'column',
         }}
       >
-        <div style={{
-          transform: 'translateY(50px)',
-        }}
-        >
+        <SanesulLogo width={64} height={85} />
+        <div style={{ transform: 'translateY(50px)' }}>
           <UserAvatar />
         </div>
         <Card style={{
@@ -87,20 +84,5 @@ function Dashboard() {
     </>
   );
 }
-
-Dashboard.getInitialProps = ({ reduxStore }) => {
-  // Tick the time once, so we'll have a
-  // valid time before first render
-  const { dispatch } = reduxStore;
-
-  const hue = reduxStore;
-  // dispatch({
-  //   type: 'TICK',
-  //   light: typeof window === 'object',
-  //   lastUpdate: Date.now(),
-  // });
-
-  return { dispatch };
-};
 
 export default withRedux(Dashboard);

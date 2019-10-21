@@ -1,6 +1,7 @@
 import {
   call, put, all, takeLatest, select,
 } from 'redux-saga/effects';
+import apiUtils from 'utils/apiUtils';
 import Router from 'next/router';
 
 // import { Creators as ProfileCreators } from '../ducks/perfil';
@@ -21,9 +22,8 @@ function* getLogin({ payload }) {
       senha,
       // uniqueId: DeviceInfo.getUniqueID(),
     });
-    if (response.status !== 200) {
-      throw response;
-    }
+    yield apiUtils.sagaInterceptResponse(response);
+
     const { data } = response;
     yield put(
       AuthCreators.getLoginSuccess({
@@ -36,7 +36,7 @@ function* getLogin({ payload }) {
       pathname: '/dashboard',
     });
   } catch (err) {
-    // yield sagaInterceptError(AuthCreators.getLoginFailure, err);
+    yield apiUtils.sagaInterceptError(AuthCreators.getLoginFailure, err);
   }
 }
 
