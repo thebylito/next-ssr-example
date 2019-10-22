@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Box } from '@material-ui/core';
+import { AppBar, Box, Hidden } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 import Link from './Link';
 import SideDrawer from './SideDrawer';
 import UserAvatar from './pages/dashboard/UserAvatar';
+import HorizontalMenu from './HorizontalMenu';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +30,12 @@ const Nav = ({ exibirBotoes = true, children = null }) => {
       <CssBaseline />
       <AppBar>
         <Toolbar>
-          <SideDrawer />
+          <Hidden smUp>
+            <SideDrawer />
+          </Hidden>
+          <Hidden xsDown>
+            <HorizontalMenu />
+          </Hidden>
           {children ? <Box className={classes.title}>{children}</Box> : (
             <Typography variant="h6" className={classes.title}>
               <Link as="/" href="/">

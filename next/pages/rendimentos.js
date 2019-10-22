@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  Grid, List, LinearProgress,
+  Grid, List, LinearProgress, Hidden, Box,
 } from '@material-ui/core';
 import useInfiniteScroll from 'hooks/useInfiniteScroll';
 import { Creators as RendimentoCreators } from 'appStore/ducks/rendimento';
@@ -9,6 +9,8 @@ import ListItemRendimento from 'components/pages/rendimento/ListItemRendimento';
 import withRedux from 'lib/redux';
 import Head from 'components/head';
 import Nav from 'components/nav';
+import UserCard from 'components/pages/perfil/UserCard';
+import { Container } from 'next/app';
 
 
 function Rendimentos() {
@@ -50,30 +52,33 @@ function Rendimentos() {
     <>
       <Head title="Meus Rendimentos" />
       <Nav />
-      <Grid
-        container
-        direction="column"
-        // alignContent="flex-start"
-        style={{
-          paddingTop: 56,
-
-        }}
-      >
-        {rendimentosLoading && <LinearProgress color="primary" />}
-        <Grid>
-          <List>
-            {rendimentos.map(listItem => (
-              <ListItemRendimento
-                key={listItem.id}
-                dados={listItem}
-                onPressItem={onPressItem}
-              />
-            ))}
-          </List>
-        </Grid>
-
-        {isFetching && <LinearProgress color="primary" />}
-      </Grid>
+      <main>
+        <Container>
+          <Grid
+            container
+            direction="row"
+          >
+            <Hidden smDown>
+              <Grid sm={4} direction="column">
+                <UserCard />
+              </Grid>
+            </Hidden>
+            <Grid direction="column" xs={12} sm={8} item>
+              {rendimentosLoading && <LinearProgress color="primary" />}
+              <List>
+                {rendimentos.map(listItem => (
+                  <ListItemRendimento
+                    key={listItem.id}
+                    dados={listItem}
+                    onPressItem={onPressItem}
+                  />
+                ))}
+              </List>
+              {isFetching && <LinearProgress color="primary" />}
+            </Grid>
+          </Grid>
+        </Container>
+      </main>
     </>
   );
 }

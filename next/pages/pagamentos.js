@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  Grid, List, LinearProgress,
+  Grid, List, LinearProgress, Hidden,
 } from '@material-ui/core';
 import useInfiniteScroll from 'hooks/useInfiniteScroll';
 import { Creators as PagamentoCreators } from 'appStore/ducks/pagamento';
@@ -10,6 +10,7 @@ import Router from 'next/router';
 import withRedux from 'lib/redux';
 import Head from 'components/head';
 import Nav from 'components/nav';
+import UserCard from 'components/pages/perfil/UserCard';
 
 
 function Pagamentos() {
@@ -59,17 +60,21 @@ function Pagamentos() {
     <>
       <Head title="Meus Pagamentos" />
       <Nav />
+      {pagamentosLoading && <LinearProgress color="primary" />}
       <Grid
         container
-        direction="column"
+        direction="row"
         // alignContent="flex-start"
         style={{
           paddingTop: 56,
-
         }}
       >
-        {pagamentosLoading && <LinearProgress color="primary" />}
-        <Grid>
+        <Hidden xsDown>
+          <Grid sm={5} md={4} direction="column" item>
+            <UserCard />
+          </Grid>
+        </Hidden>
+        <Grid direction="column" xs={12} sm={7} md={8} item>
           <List>
             {pagamentos.map(listItem => (
               <ListItemPagamento
@@ -79,9 +84,8 @@ function Pagamentos() {
               />
             ))}
           </List>
+          {isFetching && <LinearProgress color="primary" />}
         </Grid>
-
-        {isFetching && <LinearProgress color="primary" />}
       </Grid>
     </>
   );
