@@ -64,6 +64,7 @@ function Rendimentos() {
           <List>
             {rendimentos.map(listItem => (
               <ListItemRendimento
+                key={listItem.id}
                 dados={listItem}
                 onPressItem={onPressItem}
               />

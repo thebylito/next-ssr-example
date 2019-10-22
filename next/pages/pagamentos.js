@@ -73,6 +73,7 @@ function Pagamentos() {
           <List>
             {pagamentos.map(listItem => (
               <ListItemPagamento
+                key={listItem.id}
                 dados={listItem}
                 onPressItem={onPressItem}
               />

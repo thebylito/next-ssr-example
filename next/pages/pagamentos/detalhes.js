@@ -84,8 +84,5 @@ function Detalhes() {
   );
 }
 
-Detalhes.getInitialProps = ({ query }) => {
-  console.log(query);
-  return { query };
-};
+Detalhes.getInitialProps = ({ query }) => ({ query });
 export default withRedux(Detalhes);
