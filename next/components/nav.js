@@ -28,7 +28,8 @@ const Nav = ({ exibirBotoes = true, children = null }) => {
   return (
     <>
       <CssBaseline />
-      <AppBar>
+      {/* <ElevationScroll {...props}> */}
+      <AppBar position="sticky">
         <Toolbar>
           <Hidden smUp>
             <SideDrawer />
@@ -50,6 +51,7 @@ const Nav = ({ exibirBotoes = true, children = null }) => {
           )}
         </Toolbar>
       </AppBar>
+      {/* </ElevationScroll> */}
     </>
   );
 };
