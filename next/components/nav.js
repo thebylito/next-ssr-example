@@ -1,11 +1,13 @@
 import React from 'react';
-import { AppBar, Box, Hidden } from '@material-ui/core';
+import {
+  AppBar, Box, Hidden, IconButton,
+} from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
-import Link from './Link';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Creators } from 'appStore/ducks/auth';
 import SideDrawer from './SideDrawer';
 import UserAvatar from './pages/dashboard/UserAvatar';
 import HorizontalMenu from './HorizontalMenu';
@@ -24,7 +26,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Nav = ({ exibirBotoes = true, children = null }) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  const onLogout = () => {
+    dispatch(Creators.getLogoutRequest());
+  };
+
   return (
     <>
       <CssBaseline />
@@ -37,17 +45,14 @@ const Nav = ({ exibirBotoes = true, children = null }) => {
           <Hidden xsDown>
             <HorizontalMenu />
           </Hidden>
-          {children ? <Box className={classes.title}>{children}</Box> : (
-            <Typography variant="h6" className={classes.title}>
-              <Link as="/" href="/">
-                <Button style={{ color: '#fff', marginRight: 20 }} disableRipple disableFocusRipple variant="text">
-                Meu RH
-                </Button>
-              </Link>
-            </Typography>
-          )}
+          {children && <Box className={classes.title}>{children}</Box>}
           {exibirBotoes && (
-            <UserAvatar size={35} />
+            <>
+              <UserAvatar size={35} />
+              <IconButton onClick={onLogout}>
+                <ExitToAppIcon color="secondary" />
+              </IconButton>
+            </>
           )}
         </Toolbar>
       </AppBar>

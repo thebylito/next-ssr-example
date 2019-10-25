@@ -1,21 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import { IconButton, MenuItem, Typography } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { MenuItem, Typography } from '@material-ui/core';
 
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import Router from 'next/router';
-import { Creators } from 'appStore/ducks/auth';
+import MessageIcon from '@material-ui/icons/Message';
 
 const home = {
   id: 'home',
@@ -36,6 +29,12 @@ const pages = [
     name: 'Rendimentos',
     path: '/rendimentos',
     icon: <BarChartIcon />,
+  },
+  {
+    id: 'messages',
+    name: 'Mensagens',
+    path: '/mensagens',
+    icon: <MessageIcon />,
   },
 ];
 

@@ -14,6 +14,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import MessageIcon from '@material-ui/icons/Message';
 import Router from 'next/router';
 import { Creators } from 'appStore/ducks/auth';
 
@@ -36,6 +37,12 @@ const pages = [
     name: 'Rendimentos',
     path: '/rendimentos',
     icon: <BarChartIcon />,
+  },
+  {
+    id: 'messages',
+    name: 'Mensagens',
+    path: '/mensagens',
+    icon: <MessageIcon />,
   },
 ];
 
