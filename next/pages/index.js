@@ -74,7 +74,7 @@ function LoginScreen() {
             <Typography style={{ color: 'white' }} variant="h5" color="primary">Meu RH</Typography>
           </Box>
           <Card className={classes.loginForm}>
-            <LoginForm onSubmit={onSubmit} />
+            <LoginForm onSubmit={onSubmit} isLoading={authStore.loading} />
             <Typography color="error" align="center">
               {authStore.error}
             </Typography>

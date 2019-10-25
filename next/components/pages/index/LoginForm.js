@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import CustomTextField from '../../form/CustomTextField';
 
 const initialValues = {
@@ -35,7 +35,15 @@ const LoginForm = ({ onSubmit, isLoading }) => (
             type="password"
           />
         </div>
-        <Button type="submit" onClick={handleSubmit} style={{ marginTop: 15 }} color="primary" variant="contained">Entrar</Button>
+        <Button
+          type="submit"
+          onClick={handleSubmit}
+          style={{ marginTop: 15, minHeight: 36 }}
+          color="primary"
+          variant="contained"
+        >
+          {isLoading ? <CircularProgress size={22} color="secondary" /> : 'Entrar'}
+        </Button>
       </Form>
     )}
   </Formik>
