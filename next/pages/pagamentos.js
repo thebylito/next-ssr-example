@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  Grid, List, LinearProgress, Hidden,
+  Grid, List, LinearProgress, Hidden, Typography, Button, Box,
 } from '@material-ui/core';
-import useInfiniteScroll from 'hooks/useInfiniteScroll';
 import { Creators as PagamentoCreators } from 'appStore/ducks/pagamento';
 import ListItemPagamento from 'components/pages/pagamento/ListItemPagamento';
 import Router from 'next/router';
@@ -15,7 +14,7 @@ import UserCard from 'components/pages/perfil/UserCard';
 
 function Pagamentos() {
   const dispatch = useDispatch();
-
+  const [isFetching, setIsFetching] = React.useState(false);
   const [localState, setLocalState] = React.useState({
     page: 1,
   });
@@ -24,6 +23,7 @@ function Pagamentos() {
   const { pagamentos, pagamentosLoading } = useSelector(state => state.pagamento);
 
   const fetchMoreListItems = () => {
+    setIsFetching(true);
     setLocalState(oldState => {
       dispatch(PagamentoCreators.getListRequest(localState.page));
       return {
@@ -31,8 +31,6 @@ function Pagamentos() {
       };
     });
   };
-
-  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
 
   React.useEffect(() => {
     if (!pagamentosLoading) {
@@ -64,10 +62,6 @@ function Pagamentos() {
       <Grid
         container
         direction="row"
-        // alignContent="flex-start"
-        style={{
-          paddingTop: 56,
-        }}
       >
         <Hidden xsDown>
           <Grid sm={5} md={4} direction="column" item>
@@ -83,27 +77,29 @@ function Pagamentos() {
                 onPressItem={onPressItem}
               />
             ))}
+
           </List>
-          {isFetching && <LinearProgress color="primary" />}
+          {isFetching ? <LinearProgress color="primary" /> : (
+            <Box textAlign="center">
+              <Button
+                variant="text"
+                color="primary"
+                onClick={fetchMoreListItems}
+                disabled={isFetching}
+                style={{
+                  alignContent: 'center',
+                }}
+              >
+                <Typography variant="body2">
+                  Carregar Mais
+                </Typography>
+              </Button>
+            </Box>
+          )}
         </Grid>
       </Grid>
     </>
   );
 }
-
-Pagamentos.getInitialProps = ({ reduxStore }) => {
-  // Tick the time once, so we'll have a
-  // valid time before first render
-  const { dispatch } = reduxStore;
-
-  const hue = reduxStore;
-  // dispatch({
-  //   type: 'TICK',
-  //   light: typeof window === 'object',
-  //   lastUpdate: Date.now(),
-  // });
-
-  return { dispatch };
-};
 
 export default withRedux(Pagamentos);
