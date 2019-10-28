@@ -13,7 +13,7 @@ const UserAvatar = ({ size = 100 }) => {
         width: size,
         height: size,
       }}
-      src={`${apiUrl}Usuario/foto/?login=${data.loginDeRede}&cache=${new Date().getTime()}`}
+      src={`${apiUrl}Usuario/foto/?login=${data.loginDeRede}`}
     />
   );
 };

@@ -69,6 +69,9 @@ function Pagamentos() {
           </Grid>
         </Hidden>
         <Grid direction="column" xs={12} sm={7} md={8} item>
+          <Typography variant="h5" style={{ textTransform: 'uppercase' }} align="center">
+            Meus Pagamentos
+          </Typography>
           <List>
             {pagamentos.map(listItem => (
               <ListItemPagamento

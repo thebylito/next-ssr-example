@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import Head from 'components/head';
 import Nav from 'components/nav';
 import withRedux from 'lib/redux';
-import SanesulLogo from 'components/SanesulLogo';
+// import SanesulLogo from 'components/SanesulLogo';
 import UserCard from 'components/pages/perfil/UserCard';
 import { Container } from 'next/app';
 
@@ -32,7 +32,7 @@ function Dashboard() {
           alignItems="center"
           direction="column"
         >
-          <SanesulLogo width={64} height={85} />
+          {/* <SanesulLogo width={64} height={85} /> */}
           <UserCard />
         </Grid>
       </Container>

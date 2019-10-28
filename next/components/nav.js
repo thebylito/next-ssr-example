@@ -45,11 +45,11 @@ const Nav = ({ exibirBotoes = true, children = null }) => {
           <Hidden xsDown>
             <HorizontalMenu />
           </Hidden>
-          {children && <Box className={classes.title}>{children}</Box>}
+          <Box className={classes.title}>{children || null}</Box>
           {exibirBotoes && (
             <>
               <UserAvatar size={35} />
-              <IconButton onClick={onLogout}>
+              <IconButton style={{ padding: 8, paddingRight: 0 }} disableRipple onClick={onLogout}>
                 <ExitToAppIcon color="secondary" />
               </IconButton>
             </>

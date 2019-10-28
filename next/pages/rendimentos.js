@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  Grid, List, LinearProgress, Hidden, Box,
+  Grid, List, LinearProgress, Hidden, Typography,
 } from '@material-ui/core';
 import useInfiniteScroll from 'hooks/useInfiniteScroll';
 import { Creators as RendimentoCreators } from 'appStore/ducks/rendimento';
@@ -65,6 +65,9 @@ function Rendimentos() {
             </Hidden>
             <Grid direction="column" xs={12} sm={8} item>
               {rendimentosLoading && <LinearProgress color="primary" />}
+              <Typography variant="h5" style={{ textTransform: 'uppercase' }} align="center">
+                Meus Rendimentos
+              </Typography>
               <List>
                 {rendimentos.map(listItem => (
                   <ListItemRendimento
