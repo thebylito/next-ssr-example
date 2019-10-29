@@ -11,6 +11,8 @@ import Head from 'components/head';
 import Nav from 'components/nav';
 import UserCard from 'components/pages/perfil/UserCard';
 import { Container } from 'next/app';
+import PaginaTitulo from 'components/pages/shared/PaginaTitulo';
+import withAuth from 'lib/withAuth';
 
 
 function Rendimentos() {
@@ -50,8 +52,16 @@ function Rendimentos() {
 
   return (
     <>
+      <style jsx global>
+        {`
+        body {
+          background-color: #1c9aba14;
+        }
+        `}
+      </style>
       <Head title="Meus Rendimentos" />
       <Nav />
+      {rendimentosLoading && <LinearProgress color="primary" />}
       <main>
         <Grid
           container
@@ -64,9 +74,7 @@ function Rendimentos() {
           </Hidden>
           <Grid xs={12} sm={8} item>
             {rendimentosLoading && <LinearProgress color="primary" />}
-            <Typography variant="h5" style={{ textTransform: 'uppercase' }} align="center">
-                Meus Rendimentos
-            </Typography>
+            <PaginaTitulo titulo="Meus Rendimentos" />
             <List>
               {rendimentos.map(listItem => (
                 <ListItemRendimento
@@ -76,7 +84,6 @@ function Rendimentos() {
                 />
               ))}
             </List>
-            {isFetching && <LinearProgress color="primary" />}
           </Grid>
         </Grid>
       </main>
@@ -99,4 +106,4 @@ Rendimentos.getInitialProps = ({ reduxStore }) => {
   return { dispatch };
 };
 
-export default withRedux(Rendimentos);
+export default withRedux(withAuth(Rendimentos));

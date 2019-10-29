@@ -10,6 +10,7 @@ import withRedux from 'lib/redux';
 import { Creators as PagamentoCreators } from 'appStore/ducks/pagamento';
 import DetalhesCard from 'components/pages/pagamento/DetalhesCard';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+import withAuth from 'lib/withAuth';
 
 function Detalhes() {
   const dispatch = useDispatch();
@@ -79,4 +80,4 @@ function Detalhes() {
 }
 
 Detalhes.getInitialProps = ({ query }) => ({ query });
-export default withRedux(Detalhes);
+export default withRedux(withAuth(Detalhes));

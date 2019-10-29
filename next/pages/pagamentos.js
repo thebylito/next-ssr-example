@@ -11,6 +11,8 @@ import Head from 'components/head';
 import Nav from 'components/nav';
 import UserCard from 'components/pages/perfil/UserCard';
 import Scrollbar from 'react-scrollbars-custom';
+import PaginaTitulo from 'components/pages/shared/PaginaTitulo';
+import withAuth from 'lib/withAuth';
 
 
 function Pagamentos() {
@@ -57,6 +59,13 @@ function Pagamentos() {
 
   return (
     <>
+      <style jsx global>
+        {`
+        body {
+          background-color: #1c9aba14;
+        }
+        `}
+      </style>
       <Head title="Meus Pagamentos" />
       <Nav />
       {pagamentosLoading && <LinearProgress color="primary" />}
@@ -70,9 +79,7 @@ function Pagamentos() {
           </Grid>
         </Hidden>
         <Grid xs={12} sm={7} md={8} item>
-          <Typography variant="h5" style={{ textTransform: 'uppercase' }} align="center">
-            Meus Pagamentos
-          </Typography>
+          <PaginaTitulo titulo="Meus Pagamentos" />
           <Scrollbar style={{ width: '100%', height: '86vh' }}>
             <List>
               {pagamentos.map(listItem => (
@@ -107,4 +114,4 @@ function Pagamentos() {
   );
 }
 
-export default withRedux(Pagamentos);
+export default withRedux(withAuth(Pagamentos));

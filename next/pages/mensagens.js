@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  Grid, Hidden, Typography, Card, CardContent, List, Box, LinearProgress,
+  Grid, Hidden, Typography, Card, CardContent, List, Box, LinearProgress, Divider,
 } from '@material-ui/core';
 import withRedux from 'lib/redux';
 import Head from 'components/head';
@@ -12,6 +12,8 @@ import { Creators } from 'appStore/ducks/mensagem/lista';
 import UserAvatar from 'components/pages/dashboard/UserAvatar';
 import moment from 'moment';
 import Scrollbar from 'react-scrollbars-custom';
+import PaginaTitulo from 'components/pages/shared/PaginaTitulo';
+import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles({
   card: {
@@ -37,6 +39,13 @@ function Mensagens() {
 
   return (
     <>
+      <style jsx global>
+        {`
+        body {
+          background-color: #1c9aba14;
+        }
+        `}
+      </style>
       <Head title="Minhas mensagens" />
       <Nav />
       {mensagensLoading && <LinearProgress color="primary" />}
@@ -47,9 +56,7 @@ function Mensagens() {
           </Grid>
         </Hidden>
         <Grid xs={12} sm={7} md={8} item>
-          <Typography variant="h5" style={{ textTransform: 'uppercase' }} align="center">
-            Minhas Mensagens
-          </Typography>
+          <PaginaTitulo titulo="Minhas Mensagens" />
           <Scrollbar style={{ width: '100%', height: '86vh' }}>
             <List>
               {mensagens.map(mensagem => {
@@ -57,7 +64,20 @@ function Mensagens() {
                 return (
                   <Card key={mensagem.id} className={classes.card}>
                     <CardContent>
-                      <Box display="flex" flexDirection="row" alignItems="center">
+                      <Typography variant="h6">
+                        {mensagem.titulo}
+                      </Typography>
+                      <Typography variant="body2" component="p" style={{ marginTop: 10 }}>
+                        {mensagem.mensagem}
+                      </Typography>
+                      <Divider />
+                      <Box
+                        display="flex"
+                        flexDirection="row"
+                        alignItems="center"
+                        justifyContent="flex-end"
+                        style={{ marginTop: 10 }}
+                      >
                         <UserAvatar size={50} matricula={mensagem.usuarioOrigem.login} />
                         <Box style={{ marginLeft: 10 }} display="flex" flexDirection="column">
                           <Typography variant="body1" style={{ textTransform: 'uppercase' }}>
@@ -74,9 +94,6 @@ function Mensagens() {
                           </Typography>
                         </Box>
                       </Box>
-                      <Typography variant="body2" component="p" style={{ marginTop: 10 }}>
-                        {mensagem.mensagem}
-                      </Typography>
                     </CardContent>
                   </Card>
                 );
@@ -89,4 +106,4 @@ function Mensagens() {
   );
 }
 
-export default withRedux(Mensagens);
+export default withRedux(withAuth(Mensagens));

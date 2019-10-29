@@ -5,6 +5,7 @@ import Nav from 'components/nav';
 import withRedux from 'lib/redux';
 // import SanesulLogo from 'components/SanesulLogo';
 import UserCard from 'components/pages/perfil/UserCard';
+import withAuth from 'lib/withAuth';
 
 function Dashboard() {
   return (
@@ -12,16 +13,9 @@ function Dashboard() {
       <style jsx global>
         {`
         body {
-          position: absolute;
-          background-color: #1f96b7;
-          background-size: contain;
-          min-height: 100%;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
+          background-color: #1c9aba14;
         }
-    `}
+        `}
       </style>
       <Head title="Página Inicial" />
       <Nav />
@@ -37,4 +31,4 @@ function Dashboard() {
   );
 }
 
-export default withRedux(Dashboard);
+export default withRedux(withAuth(Dashboard));

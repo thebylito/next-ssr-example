@@ -8,6 +8,7 @@ import Head from 'components/head';
 import Nav from 'components/nav';
 import withRedux from 'lib/redux';
 
+import withAuth from 'lib/withAuth';
 import ListItemProfile from '../components/pages/perfil/ListItemProfile';
 
 
@@ -19,6 +20,13 @@ function Perfil() {
 
   return (
     <>
+      <style jsx global>
+        {`
+        body {
+          background-color: #1c9aba14;
+        }
+        `}
+      </style>
       <Head title="Meu Perfil" />
       <Nav>
         <ButtonGroup
@@ -33,13 +41,7 @@ function Perfil() {
           </Button>
         </ButtonGroup>
       </Nav>
-      <Grid
-        container
-        // alignContent="flex-start"
-        style={{
-          paddingTop: 56,
-        }}
-      >
+      <Grid container>
         {selectedTab === 0 && (
           <>
             <Typography style={{ width: '100%' }} align="center" variant="h6" component="div">Dados Pessoais</Typography>
@@ -82,4 +84,4 @@ function Perfil() {
   );
 }
 
-export default withRedux(Perfil);
+export default withRedux(withAuth(Perfil));

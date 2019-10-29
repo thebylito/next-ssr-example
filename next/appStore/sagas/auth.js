@@ -3,8 +3,11 @@ import {
 } from 'redux-saga/effects';
 import { apiUtils } from 'utils/apiUtils';
 import Router from 'next/router';
+import cookie from 'js-cookie';
+
 
 // import { Creators as ProfileCreators } from '../ducks/perfil';
+import { setCookie, removeCookie } from 'utils/cookie';
 import { Creators as AuthCreators, Types as AuthTypes } from '../ducks/auth';
 import api from '../../services/api';
 
@@ -25,6 +28,7 @@ function* getLogin({ payload }) {
     yield apiUtils.sagaInterceptResponse(response);
 
     const { data } = response;
+    yield call(setCookie, 'auth', data.token);
     yield put(
       AuthCreators.getLoginSuccess({
         funcionario: data.funcionario,
@@ -41,9 +45,11 @@ function* getLogin({ payload }) {
 }
 
 function* getLogout() {
+  yield call(removeCookie, 'auth');
   yield call(Router.push, {
     pathname: '/',
   });
+  yield put(AuthCreators.getLogoutSuccess());
 }
 
 export default function* AuthSagas() {

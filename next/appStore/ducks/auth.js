@@ -4,6 +4,7 @@ export const Types = {
   GET_FAILURE: 'login/GET_FAILURE',
 
   GET_LOGOUT_REQUEST: 'login/GET_LOGOUT_REQUEST',
+  GET_LOGOUT_SUCCESS: 'login/GET_LOGOUT_SUCCESS',
 };
 
 const initialState = {
@@ -26,7 +27,7 @@ export default function (state = initialState, action) {
       };
     case Types.GET_FAILURE:
       return { ...state, loading: false, error: action.payload };
-    case Types.GET_LOGOUT_REQUEST:
+    case Types.GET_LOGOUT_SUCCESS:
       return initialState;
     default:
       return state;
@@ -48,5 +49,8 @@ export const Creators = {
   }),
   getLogoutRequest: () => ({
     type: Types.GET_LOGOUT_REQUEST,
+  }),
+  getLogoutSuccess: () => ({
+    type: Types.GET_LOGOUT_SUCCESS,
   }),
 };
