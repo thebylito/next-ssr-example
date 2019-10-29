@@ -53,34 +53,32 @@ function Rendimentos() {
       <Head title="Meus Rendimentos" />
       <Nav />
       <main>
-        <Container>
-          <Grid
-            container
-            direction="row"
-          >
-            <Hidden smDown>
-              <Grid sm={4} direction="column">
-                <UserCard />
-              </Grid>
-            </Hidden>
-            <Grid direction="column" xs={12} sm={8} item>
-              {rendimentosLoading && <LinearProgress color="primary" />}
-              <Typography variant="h5" style={{ textTransform: 'uppercase' }} align="center">
-                Meus Rendimentos
-              </Typography>
-              <List>
-                {rendimentos.map(listItem => (
-                  <ListItemRendimento
-                    key={listItem.id}
-                    dados={listItem}
-                    onPressItem={onPressItem}
-                  />
-                ))}
-              </List>
-              {isFetching && <LinearProgress color="primary" />}
+        <Grid
+          container
+          direction="row"
+        >
+          <Hidden smDown>
+            <Grid sm={4} item>
+              <UserCard />
             </Grid>
+          </Hidden>
+          <Grid xs={12} sm={8} item>
+            {rendimentosLoading && <LinearProgress color="primary" />}
+            <Typography variant="h5" style={{ textTransform: 'uppercase' }} align="center">
+                Meus Rendimentos
+            </Typography>
+            <List>
+              {rendimentos.map(listItem => (
+                <ListItemRendimento
+                  key={listItem.id}
+                  dados={listItem}
+                  onPressItem={onPressItem}
+                />
+              ))}
+            </List>
+            {isFetching && <LinearProgress color="primary" />}
           </Grid>
-        </Container>
+        </Grid>
       </main>
     </>
   );

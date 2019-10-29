@@ -5,7 +5,6 @@ import Nav from 'components/nav';
 import withRedux from 'lib/redux';
 // import SanesulLogo from 'components/SanesulLogo';
 import UserCard from 'components/pages/perfil/UserCard';
-import { Container } from 'next/app';
 
 function Dashboard() {
   return (
@@ -26,16 +25,14 @@ function Dashboard() {
       </style>
       <Head title="Página Inicial" />
       <Nav />
-      <Container>
-        <Grid
-          container
-          alignItems="center"
-          direction="column"
-        >
-          {/* <SanesulLogo width={64} height={85} /> */}
-          <UserCard />
-        </Grid>
-      </Container>
+      <Grid
+        container
+        alignItems="center"
+        direction="column"
+      >
+        {/* <SanesulLogo width={64} height={85} /> */}
+        <UserCard />
+      </Grid>
     </>
   );
 }
