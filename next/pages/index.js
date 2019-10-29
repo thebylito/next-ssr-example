@@ -49,6 +49,16 @@ function LoginScreen() {
     dispatch(AuthCreators.getLoginRequest({ login: matricula, senha }));
   };
 
+  React.useEffect(() => {
+    const OneSignal = window.OneSignal || [];
+    OneSignal.push(() => OneSignal.init({
+      appId: '36dbc55e-d17a-45cd-854c-d2836590e2ac',
+      notifyButton: {
+        enable: true,
+      },
+    }));
+  }, []);
+
   return (
     <>
       <Head title="Acessar - Meu RH" />
