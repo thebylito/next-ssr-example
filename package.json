@@ -43,6 +43,7 @@
     "clsx": "^1.0.4",
     "cross-env": "^6.0.3",
     "formik": "^1.5.8",
+    "js-cookie": "^2.2.1",
     "moment": "^2.24.0",
     "moment-immutable": "^1.0.4",
     "next": "^9.0.7",
