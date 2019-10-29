@@ -42,13 +42,7 @@ function Detalhes() {
           {`Período: ${mes}/${ano}`}
         </Typography>
       </Nav>
-      <Grid
-        container
-        direction="column"
-        style={{
-          paddingTop: 56,
-        }}
-      >
+      <Grid container direction="column">
         {pagamentoLoading && <LinearProgress color="primary" />}
         {pagamento && Object.keys(pagamento).length > 0 && pagamento.totalProventos !== 0 && (
           <>
