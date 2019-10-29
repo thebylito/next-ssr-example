@@ -10,6 +10,7 @@ export const auth = ctx => new Promise((resolve) => {
   if (ctx.req && !token) {
     if (typeof ctx.res.writeHead === 'function') ctx.res.writeHead(302, { Location: '/' });
     if (typeof ctx.res.end === 'function') ctx.res.end();
+    resolve(null);
     return;
   }
   if (!token) {
