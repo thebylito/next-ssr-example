@@ -10,6 +10,7 @@ import withRedux from 'lib/redux';
 import Head from 'components/head';
 import Nav from 'components/nav';
 import UserCard from 'components/pages/perfil/UserCard';
+import Scrollbar from 'react-scrollbars-custom';
 
 
 function Pagamentos() {
@@ -64,41 +65,42 @@ function Pagamentos() {
         direction="row"
       >
         <Hidden xsDown>
-          <Grid sm={5} md={4} direction="column" item>
+          <Grid sm={5} md={4} item>
             <UserCard />
           </Grid>
         </Hidden>
-        <Grid direction="column" xs={12} sm={7} md={8} item>
+        <Grid xs={12} sm={7} md={8} item>
           <Typography variant="h5" style={{ textTransform: 'uppercase' }} align="center">
             Meus Pagamentos
           </Typography>
-          <List>
-            {pagamentos.map(listItem => (
-              <ListItemPagamento
-                key={listItem.id}
-                dados={listItem}
-                onPressItem={onPressItem}
-              />
-            ))}
-
-          </List>
-          {isFetching ? <LinearProgress color="primary" /> : (
-            <Box textAlign="center">
-              <Button
-                variant="text"
-                color="primary"
-                onClick={fetchMoreListItems}
-                disabled={isFetching}
-                style={{
-                  alignContent: 'center',
-                }}
-              >
-                <Typography variant="body2">
-                  Carregar Mais
-                </Typography>
-              </Button>
-            </Box>
-          )}
+          <Scrollbar style={{ width: '100%', height: '86vh' }}>
+            <List>
+              {pagamentos.map(listItem => (
+                <ListItemPagamento
+                  key={listItem.id}
+                  dados={listItem}
+                  onPressItem={onPressItem}
+                />
+              ))}
+            </List>
+            {!isFetching && (
+              <Box textAlign="center">
+                <Button
+                  variant="text"
+                  color="primary"
+                  onClick={fetchMoreListItems}
+                  disabled={isFetching}
+                  style={{
+                    alignContent: 'center',
+                  }}
+                >
+                  <Typography variant="body2">
+                    Carregar Mais
+                  </Typography>
+                </Button>
+              </Box>
+            )}
+          </Scrollbar>
         </Grid>
       </Grid>
     </>
