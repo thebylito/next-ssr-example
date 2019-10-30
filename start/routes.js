@@ -1,4 +1,3 @@
-
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -17,6 +16,19 @@ const Next = use('Adonis/Addons/Next');
 const handler = Next.getRequestHandler();
 
 Route.post('/api/log', 'DebugController.create');
+
+Route.get('/OneSignalSDKWorker.js', async ({ response }) => {
+  response.header('Content-type', 'text/javascript');
+  response.send(
+    'importScripts(\'https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js\');',
+  );
+});
+Route.get('/OneSignalSDKUpdaterWorker.js', async ({ response }) => {
+  response.header('Content-type', 'text/javascript');
+  response.send(
+    'importScripts(\'https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js\');',
+  );
+});
 
 // * Next Routes
 // Route.get('/pagamentos/detalhes', ({ request, response }) => {
