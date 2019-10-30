@@ -8,8 +8,8 @@ const getDisplayName = Component => Component.displayName || Component.name || '
 export const auth = ctx => new Promise((resolve) => {
   const token = getCookie('auth', ctx.req);
   if (ctx.req && !token) {
-    ctx.res.writeHead(302, { Location: '/' });
-    ctx.res.end();
+    if (typeof ctx.res.writeHead === 'function') ctx.res.writeHead(302, { Location: '/' });
+    if (typeof ctx.res.end === 'function') ctx.res.end();
     return;
   }
   if (!token) {
