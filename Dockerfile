@@ -15,4 +15,5 @@ RUN yarn
 COPY . /usr/src/app
 COPY --from=builder /usr/src/app/next /usr/src/app/next
 EXPOSE 80
+#
 CMD ["node", "server.js"]
