@@ -7,6 +7,9 @@ const formatPrice = (value) => parseFloat(value).toLocaleString('pt-BR', {
   currency: 'BRL',
 });
 
+const isNullOrUndefined = value => value === undefined || value === null || value === '';
+
 export const appUtils = {
   formatPrice,
+  isNullOrUndefined,
 };
