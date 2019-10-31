@@ -106,4 +106,4 @@ function Mensagens() {
   );
 }
 
-export default withRedux(withAuth(Mensagens));
+export default withRedux(withAuth(Mensagens, ['usuario']));

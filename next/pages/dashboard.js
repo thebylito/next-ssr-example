@@ -31,4 +31,4 @@ function Dashboard() {
   );
 }
 
-export default withRedux(withAuth(Dashboard));
+export default withRedux(withAuth(Dashboard, ['usuario']));
