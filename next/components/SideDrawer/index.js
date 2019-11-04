@@ -10,6 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import FlightIcon from '@material-ui/icons/Flight';
 
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
@@ -18,19 +19,24 @@ import MessageIcon from '@material-ui/icons/Message';
 import Router from 'next/router';
 import { Creators } from 'appStore/ducks/auth';
 
-const home = {
-  id: 'home',
-  name: 'Home',
-  path: '/dashboard',
-  icon: <HomeIcon />,
-};
-
-const pages = [
+export const appPages = [
+  {
+    id: 'home',
+    name: 'Home',
+    path: '/dashboard',
+    icon: <HomeIcon />,
+  },
   {
     id: 'pagamentos',
     name: 'Pagamentos',
     path: '/pagamentos',
     icon: <AccountBalanceWalletIcon />,
+  },
+  {
+    id: 'ferias',
+    name: 'Férias',
+    path: '/ferias',
+    icon: <FlightIcon />,
   },
   {
     id: 'rendimentos',
@@ -96,19 +102,15 @@ export default function SideDrawer() {
       onClick={toggleDrawer(side, false)}
       onKeyDown={toggleDrawer(side, false)}
     >
-      <List>
-        <ListItem button onClick={onLinkPress(home.path)}>
-          <ListItemIcon>{home.icon}</ListItemIcon>
-          <ListItemText primary={home.name} />
-        </ListItem>
-      </List>
-      <Divider />
       <List className={classes.listMenus}>
-        {pages.map((menu) => (
-          <ListItem button key={menu.id} onClick={onLinkPress(menu.path)}>
-            <ListItemIcon>{menu.icon}</ListItemIcon>
-            <ListItemText primary={menu.name} />
-          </ListItem>
+        {appPages.map((menu) => (
+          <>
+            <ListItem button key={menu.id} onClick={onLinkPress(menu.path)}>
+              <ListItemIcon>{menu.icon}</ListItemIcon>
+              <ListItemText primary={menu.name} />
+            </ListItem>
+            {menu.id === 'home' && <Divider />}
+          </>
         ))}
       </List>
       <Divider />

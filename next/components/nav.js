@@ -1,62 +1,78 @@
 import React from 'react';
 import {
-  AppBar, Box, Hidden, IconButton,
+  AppBar, Box, Hidden, IconButton, Grid, Menu, MenuItem,
 } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import Toolbar from '@material-ui/core/Toolbar';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Creators } from 'appStore/ducks/auth';
 import SideDrawer from './SideDrawer';
 import UserAvatar from './pages/dashboard/UserAvatar';
 import HorizontalMenu from './HorizontalMenu';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    margin: '0 10px',
-  },
-}));
-
-const Nav = ({ exibirBotoes = true, children = null }) => {
+const Nav = ({ exibirBotoes = true }) => {
   const dispatch = useDispatch();
-  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleProfileMenuOpen = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
 
   const onLogout = () => {
     dispatch(Creators.getLogoutRequest());
   };
+  const isMenuOpen = Boolean(anchorEl);
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      id={menuId}
+      keepMounted
+      anchorOrigin={{ vertical: 'center', horizontal: 'left' }}
+      transformOrigin={{ vertical: 'center', horizontal: 'left' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      {/* <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+      <Divider /> */}
+      <MenuItem onClick={onLogout}>Sair</MenuItem>
+    </Menu>
+  );
 
   return (
     <>
       <CssBaseline />
-      {/* <ElevationScroll {...props}> */}
       <AppBar position="sticky">
-        <Toolbar>
-          <Hidden smUp>
-            <SideDrawer />
-          </Hidden>
-          <Hidden xsDown>
-            <HorizontalMenu />
-          </Hidden>
-          <Box className={classes.title}>{children || null}</Box>
-          {exibirBotoes && (
-            <>
-              <UserAvatar size={35} />
-              <IconButton style={{ padding: 8, paddingRight: 0 }} disableRipple onClick={onLogout}>
-                <ExitToAppIcon color="secondary" />
-              </IconButton>
-            </>
-          )}
+        <Toolbar style={{ paddingRight: 0 }}>
+          <Grid container direction="row" justify="space-between" alignItems="center">
+            <Grid item>
+              <Hidden smUp>
+                <SideDrawer />
+              </Hidden>
+              <Hidden xsDown>
+                <HorizontalMenu />
+              </Hidden>
+            </Grid>
+            <Grid item>
+              {exibirBotoes && (
+              <Box>
+                <IconButton
+                  aria-controls="primary-search-account-menu"
+                  onClick={handleProfileMenuOpen}
+                >
+                  <UserAvatar size={35} />
+                </IconButton>
+              </Box>
+              )}
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
-      {/* </ElevationScroll> */}
+      {renderMenu}
     </>
   );
 };

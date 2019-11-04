@@ -4,39 +4,8 @@ import List from '@material-ui/core/List';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { MenuItem, Typography } from '@material-ui/core';
 
-import HomeIcon from '@material-ui/icons/Home';
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
-import BarChartIcon from '@material-ui/icons/BarChart';
 import Router from 'next/router';
-import MessageIcon from '@material-ui/icons/Message';
-
-const home = {
-  id: 'home',
-  name: 'Home',
-  path: '/dashboard',
-  icon: <HomeIcon />,
-};
-
-const pages = [
-  {
-    id: 'pagamentos',
-    name: 'Pagamentos',
-    path: '/pagamentos',
-    icon: <AccountBalanceWalletIcon />,
-  },
-  {
-    id: 'rendimentos',
-    name: 'Rendimentos',
-    path: '/rendimentos',
-    icon: <BarChartIcon />,
-  },
-  {
-    id: 'messages',
-    name: 'Mensagens',
-    path: '/mensagens',
-    icon: <MessageIcon />,
-  },
-];
+import { appPages } from 'components/SideDrawer';
 
 
 const useStyles = makeStyles({
@@ -79,11 +48,7 @@ export default function HorizontalMenu() {
 
   return (
     <List className={classes.listMenus}>
-      <MenuItem className={classes.menuItem} button onClick={onLinkPress(home.path)}>
-        <ListItemIcon className={classes.menuIcon}>{home.icon}</ListItemIcon>
-        <Typography variant="caption">{home.name}</Typography>
-      </MenuItem>
-      {pages.map((menu) => (
+      {appPages.map((menu) => (
         <MenuItem
           className={classes.menuItem}
           button

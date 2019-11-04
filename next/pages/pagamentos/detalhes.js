@@ -11,6 +11,7 @@ import { Creators as PagamentoCreators } from 'appStore/ducks/pagamento';
 import DetalhesCard from 'components/pages/pagamento/DetalhesCard';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import withAuth from 'lib/withAuth';
+import PaginaTitulo from 'components/pages/shared/PaginaTitulo';
 
 function Detalhes() {
   const dispatch = useDispatch();
@@ -38,42 +39,42 @@ function Detalhes() {
   return (
     <>
       <Head title="Meus Detalhes" />
-      <Nav>
-        <Typography align="center">
-          {`Período: ${mes}/${ano}`}
-        </Typography>
-      </Nav>
-      <Grid container direction="column">
-        {pagamentoLoading && <LinearProgress color="primary" />}
-        {pagamento && Object.keys(pagamento).length > 0 && pagamento.totalProventos !== 0 && (
-          <>
-            <DetalhesCard
-              label="Proventos"
-              value={pagamento.totalProventos}
-              subItems={pagamento.proventos}
-              ehDesconto={false}
-            />
-            <DetalhesCard
-              label="Descontos"
-              value={pagamento.totalDescontos}
-              subItems={pagamento.descontos}
-            />
-            <DetalhesCard label="Bases" subItems={pagamento.bases} />
-            <DetalhesCard
-              label="Líquido"
-              value={pagamento.totalLiquido}
-              ehDesconto={false}
-            />
-            <Button
-              variant="contained"
-              style={{ margin: 8 }}
-              color="primary"
-            >
-              <Typography style={{ marginRight: 10 }}>Gerar PDF</Typography>
-              <CloudDownloadIcon color="secondary" onClick={getPagamentoDownload} />
-            </Button>
-          </>
-        )}
+      <Nav />
+      {pagamentoLoading && <LinearProgress color="primary" />}
+      <PaginaTitulo titulo={`Período: ${mes}/${ano}`} />
+      <Grid container direction="row" justify="center">
+        <Grid item xs={12} sm={8} md={7}>
+          {pagamento && Object.keys(pagamento).length > 0 && pagamento.totalProventos !== 0 && (
+            <>
+              <DetalhesCard
+                label="Proventos"
+                value={pagamento.totalProventos}
+                subItems={pagamento.proventos}
+                ehDesconto={false}
+              />
+              <DetalhesCard
+                label="Descontos"
+                value={pagamento.totalDescontos}
+                subItems={pagamento.descontos}
+              />
+              <DetalhesCard label="Bases" subItems={pagamento.bases} />
+              <DetalhesCard
+                label="Líquido"
+                value={pagamento.totalLiquido}
+                ehDesconto={false}
+              />
+              <Button
+                variant="contained"
+                style={{ margin: 8 }}
+                color="primary"
+              >
+                <Typography style={{ marginRight: 10 }}>Gerar PDF</Typography>
+                <CloudDownloadIcon color="secondary" onClick={getPagamentoDownload} />
+              </Button>
+            </>
+          )}
+        </Grid>
+
       </Grid>
     </>
   );

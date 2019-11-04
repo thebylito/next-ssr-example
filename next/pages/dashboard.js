@@ -17,7 +17,7 @@ function Dashboard() {
         }
         `}
       </style>
-      <Head title="Página Inicial" />
+      <Head title="MeuRH - HOME" />
       <Nav />
       <Grid
         container
