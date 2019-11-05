@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   Grid, List, LinearProgress, Hidden, Typography, Button, Box,
 } from '@material-ui/core';
-import { Creators as PagamentoCreators } from 'appStore/ducks/pagamento';
-import ListItemPagamento from 'components/pages/pagamento/ListItemPagamento';
+import ListItemFerias from 'components/pages/ferias/ListItemFerias';
 import Router from 'next/router';
 import withRedux from 'lib/redux';
 import Head from 'components/head';
@@ -13,9 +12,9 @@ import UserCard from 'components/pages/perfil/UserCard';
 import Scrollbar from 'react-scrollbars-custom';
 import PaginaTitulo from 'components/pages/shared/PaginaTitulo';
 import withAuth from 'lib/withAuth';
+import { Creators as FeriasListaCreators } from 'appStore/ducks/ferias/lista';
 
-
-function Pagamentos() {
+function Ferias() {
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = React.useState(false);
   const [localState, setLocalState] = React.useState({
@@ -23,12 +22,12 @@ function Pagamentos() {
   });
 
   // const theme = useTheme();
-  const { pagamentos, pagamentosLoading } = useSelector(state => state.pagamento);
+  const { ferias, feriasLoading } = useSelector(state => state.ferias.lista);
 
   const fetchMoreListItems = () => {
     setIsFetching(true);
     setLocalState(oldState => {
-      dispatch(PagamentoCreators.getListRequest(localState.page));
+      dispatch(FeriasListaCreators.getListaRequest(localState.page));
       return {
         ...oldState, page: oldState.page + 1,
       };
@@ -36,10 +35,10 @@ function Pagamentos() {
   };
 
   React.useEffect(() => {
-    if (!pagamentosLoading) {
+    if (!feriasLoading) {
       setIsFetching(false);
     }
-  }, [pagamentosLoading]);
+  }, [feriasLoading]);
 
   React.useEffect(() => {
     fetchMoreListItems();
@@ -47,13 +46,8 @@ function Pagamentos() {
 
   const onPressItem = (dados) => () => {
     Router.push({
-      pathname: '/pagamentos/detalhes',
-      query: {
-        mes: dados.mes,
-        ano: dados.ano,
-        roteiro: dados.roteiro,
-        semana: dados.semana,
-      },
+      pathname: '/ferias/detalhes',
+      query: { periodo: dados.periodo },
     });
   };
 
@@ -66,7 +60,7 @@ function Pagamentos() {
         }
         `}
       </style>
-      <Head title="Meus Pagamentos" />
+      <Head title="Minhas Férias" />
       <Scrollbar
         disableTracksWidthCompensation
         style={{
@@ -84,10 +78,10 @@ function Pagamentos() {
             </Grid>
           </Hidden>
           <Grid xs={12} sm={7} md={8} item>
-            <PaginaTitulo titulo="Meus Pagamentos" />
+            <PaginaTitulo titulo="Minhas Férias" />
             <List>
-              {pagamentos.map(listItem => (
-                <ListItemPagamento
+              {ferias.map(listItem => (
+                <ListItemFerias
                   key={listItem.id}
                   dados={listItem}
                   onPressItem={onPressItem}
@@ -101,16 +95,14 @@ function Pagamentos() {
                   color="primary"
                   onClick={fetchMoreListItems}
                   disabled={isFetching}
-                  style={{
-                    alignContent: 'center',
-                  }}
+                  style={{ alignContent: 'center' }}
                 >
                   <Typography variant="body2">
                     Carregar Mais
                   </Typography>
                 </Button>
               </Box>
-            ) : (<>{pagamentosLoading && <LinearProgress color="primary" />}</>)}
+            ) : (<>{feriasLoading && <LinearProgress color="primary" />}</>)}
           </Grid>
         </Grid>
       </Scrollbar>
@@ -118,4 +110,4 @@ function Pagamentos() {
   );
 }
 
-export default withRedux(withAuth(Pagamentos));
+export default withRedux(withAuth(Ferias));

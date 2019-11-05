@@ -29,7 +29,7 @@ export const auth = async (ctx, permissions) => {
     Router.replace('/');
     return null;
   }
-  const res = await fetch(`${apiUrl}conta/Papeis/`, {
+  const res = await fetch(`${apiUrl}conta/papeis/`, {
     method: 'GET',
     headers: {
       Authorization: token,
