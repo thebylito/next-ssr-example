@@ -3,6 +3,8 @@ import auth from './auth';
 import pagamento from './pagamento';
 import rendimento from './rendimento';
 import mensagemLista from './mensagem/lista';
+import feriasLista from './ferias/lista';
+import feriasDetalhes from './ferias/item';
 
 function* rootSaga() {
   yield all([
@@ -10,6 +12,8 @@ function* rootSaga() {
     fork(pagamento),
     fork(rendimento),
     fork(mensagemLista),
+    fork(feriasLista),
+    fork(feriasDetalhes),
   ]);
 }
 

@@ -15,7 +15,7 @@ function* getPagamento({ payload }) {
     const {
       mes, ano, roteiro, semana,
     } = payload;
-    const response = yield call(api.get, 'usuario/pagamento', {
+    const response = yield call(api.get, 'v2/pagamentos/detalhes', {
       mes, ano, roteiro, semana,
 
     });
@@ -32,7 +32,7 @@ function* getPagamento({ payload }) {
 function* getListaPagamentos({ payload }) {
   try {
     const { page } = payload;
-    const response = yield call(api.get, 'usuario/pagamentos', {
+    const response = yield call(api.get, 'v2/pagamentos/lista', {
       perPage: 12,
       page,
     });

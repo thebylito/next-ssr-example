@@ -3,6 +3,8 @@ import auth from './auth';
 import pagamento from './pagamento';
 import rendimento from './rendimento';
 import mensagemLista from './mensagem/lista';
+import feriasLista from './ferias/lista';
+import feriasItem from './ferias/item';
 
 export default combineReducers({
   auth,
@@ -10,5 +12,9 @@ export default combineReducers({
   rendimento,
   mensagem: combineReducers({
     lista: mensagemLista,
+  }),
+  ferias: combineReducers({
+    lista: feriasLista,
+    item: feriasItem,
   }),
 });
