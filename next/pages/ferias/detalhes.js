@@ -32,6 +32,7 @@ function Detalhes() {
 
   const obterData = (date) => moment(date, 'YYYYMMDD').format('DD/MM/YYYY');
 
+  if (!detalhes) return null;
 
   return (
     <>
