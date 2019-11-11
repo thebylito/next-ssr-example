@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  Grid, List, LinearProgress, Hidden, Typography, Button, Box,
+  Grid, List, LinearProgress, Hidden, Typography, Button, Box, Card, Divider,
 } from '@material-ui/core';
 import ListItemFerias from 'components/pages/ferias/ListItemFerias';
 import Router from 'next/router';
@@ -13,8 +13,23 @@ import Scrollbar from 'react-scrollbars-custom';
 import PaginaTitulo from 'components/pages/shared/PaginaTitulo';
 import withAuth from 'lib/withAuth';
 import { Creators as FeriasListaCreators } from 'appStore/ducks/ferias/lista';
+import { makeStyles } from '@material-ui/core/styles';
+import moment from 'moment';
+import { appUtils } from 'utils/appUtils';
+
+const useStyles = makeStyles(theme => ({
+  cardFeriasProgramadas: {
+    margin: 16,
+    padding: 16,
+  },
+  separador: {
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
+
 
 function Ferias() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = React.useState(false);
   const [localState, setLocalState] = React.useState({
@@ -23,6 +38,7 @@ function Ferias() {
 
   // const theme = useTheme();
   const { ferias, feriasLoading } = useSelector(state => state.ferias.lista);
+  const { data: programada } = useSelector(state => state.ferias.programada);
 
   const fetchMoreListItems = () => {
     setIsFetching(true);
@@ -49,6 +65,13 @@ function Ferias() {
       pathname: '/ferias/detalhes',
       query: { periodo: dados.periodo },
     });
+  };
+
+  const formatarData = (data) => {
+    if (appUtils.isNullOrUndefined(data.trim())) {
+      return '---';
+    }
+    return moment(data, 'YYYYMMDD').format('DD/MM/YYYY');
   };
 
   return (
@@ -80,6 +103,57 @@ function Ferias() {
           <Grid xs={12} sm={7} md={8} item>
             <PaginaTitulo titulo="Minhas Férias" />
             <List>
+              {programada && (
+              <Card className={classes.cardFeriasProgramadas}>
+                <Typography color="primary" align="center" variant="h4">Férias Programadas</Typography>
+                <Box display="flex" flexDirection="row" justifyContent="space-between">
+                  <Typography variant="body1">Periodo aquisitivo</Typography>
+                  <Typography align="center" variant="subtitle2">{`${formatarData(programada.dtinipaq)} - ${formatarData(programada.dtfimpaq)}`}</Typography>
+                </Box>
+                <Divider className={classes.separador} />
+                <Box display="flex" flexDirection="row" justifyContent="space-between" marginTop={1}>
+                  <Typography>Dias vencidos</Typography>
+                  <Typography align="center" variant="subtitle2">{programada.diasvencidos}</Typography>
+                </Box>
+                <Divider className={classes.separador} />
+                <Box display="flex" flexDirection="row" justifyContent="space-between" marginTop={1}>
+                  <Typography>Dias a vencer</Typography>
+                  <Typography align="center" variant="subtitle2">{programada.diasvencer}</Typography>
+                </Box>
+                <Divider className={classes.separador} />
+                <Box display="flex" justifyContent="flex-end">
+                  <Box display="flex" flexDirection="row" justifyContent="space-between" marginRight={5}>
+                    <Box display="flex" flexDirection="column" marginRight={1}>
+                      <Typography color="primary" variant="h6" align="center">Início</Typography>
+                      <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG1)}</Typography>
+                      <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG2)}</Typography>
+                      <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG3)}</Typography>
+                    </Box>
+                    <Divider className={classes.separador} orientation="vertical" />
+                  </Box>
+                  <Box display="flex" flexDirection="row" justifyContent="space-between" marginRight={5}>
+                    <Box display="flex" flexDirection="column" marginRight={1}>
+                      <Typography color="primary" variant="h6">Duração(dias)</Typography>
+                      <Typography align="right" variant="subtitle2">{programada.diasferiaS1}</Typography>
+                      <Typography align="right" variant="subtitle2">{programada.diasferiaS2}</Typography>
+                      <Typography align="right" variant="subtitle2">{programada.diasferiaS3}</Typography>
+                    </Box>
+                    <Divider className={classes.separador} orientation="vertical" />
+                  </Box>
+                  <Divider className={classes.separador} orientation="vertical" />
+                  <Box display="flex" flexDirection="row" justifyContent="space-between">
+                    <Box display="flex" flexDirection="column" marginRight={1}>
+                      <Typography color="primary" variant="h6">Abono</Typography>
+                      <Typography align="right" variant="subtitle2">{programada.diasabonO1}</Typography>
+                      <Typography align="right" variant="subtitle2">{programada.diasabonO2}</Typography>
+                      <Typography align="right" variant="subtitle2">{programada.diasabonO3}</Typography>
+                    </Box>
+                    <Divider className={classes.separador} orientation="vertical" />
+                  </Box>
+
+                </Box>
+              </Card>
+              )}
               {ferias.map(listItem => (
                 <ListItemFerias
                   key={listItem.id}

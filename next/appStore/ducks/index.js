@@ -5,6 +5,7 @@ import rendimento from './rendimento';
 import mensagemLista from './mensagem/lista';
 import feriasLista from './ferias/lista';
 import feriasItem from './ferias/item';
+import feriasProgramada from './ferias/programada';
 
 export default combineReducers({
   auth,
@@ -16,5 +17,6 @@ export default combineReducers({
   ferias: combineReducers({
     lista: feriasLista,
     item: feriasItem,
+    programada: feriasProgramada,
   }),
 });

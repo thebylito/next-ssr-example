@@ -6,6 +6,7 @@ import {
   Creators as FeriasItemCreators,
   Types as FeriasItemTypes,
 } from 'appStore/ducks/ferias/item';
+
 import moment from 'moment';
 
 

@@ -23,6 +23,7 @@ const middlewares = [sagaMiddleware, authMiddleware];
 export default () => {
   const store = createStore(
     persistedReducer,
+    {},
     composeWithDevTools(applyMiddleware(...middlewares)),
   );
   const persistor = persistStore(store);
