@@ -22,14 +22,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
+const mimeTypesAceitos = ['image/png', 'image/jpeg'];
+
+
 function UploadDialogModal(props) {
   const [file, setFile] = React.useState(null);
   const [preview, setPreview] = React.useState(null);
-  const onDrop = React.useCallback(acceptedFile => {
-    setFile(acceptedFile[0]);
-    setPreview(URL.createObjectURL(acceptedFile[0]));
-    // Do something with the files
+
+  const onDrop = React.useCallback(([acceptedFile]) => {
+    if (!mimeTypesAceitos.includes(acceptedFile.type)) {
+      setFile(null);
+      setPreview(null);
+      // eslint-disable-next-line
+      alert('Arquivo não suportado');
+      return;
+    }
+    setFile(acceptedFile);
+    setPreview(URL.createObjectURL(acceptedFile));
   }, []);
+
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
   const classes = useStyles();
   const { onClose, open, onImageSubmit } = props;
