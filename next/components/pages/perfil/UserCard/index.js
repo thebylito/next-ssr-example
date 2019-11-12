@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import Router from 'next/router';
 import UserAvatar from 'components/pages/dashboard/UserAvatar';
 import ProfileDescriptionItem from 'components/pages/dashboard/ProfileDescriptionItem';
+import UploadDialog from './UploadDialog';
 
 function UserCard() {
   const { data } = useSelector(state => state.auth);
@@ -16,13 +17,21 @@ function UserCard() {
   };
   return (
     <>
-      <div style={{ transform: 'translateY(50px)', justifyContent: 'center', display: 'flex' }}>
+      <div style={{
+        transform: 'translateY(75px)',
+        justifyContent: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+      >
         <UserAvatar />
+        <UploadDialog />
       </div>
       <Card style={{
         margin: '0 15px',
         padding: 20,
-        paddingTop: 50,
+        paddingTop: 75,
       }}
       >
         <Box

@@ -6,6 +6,7 @@ import mensagemLista from './mensagem/lista';
 import feriasLista from './ferias/lista';
 import feriasItem from './ferias/item';
 import feriasProgramada from './ferias/programada';
+import perfilAvatar from './perfil/avatar';
 
 export default combineReducers({
   auth,
@@ -18,5 +19,8 @@ export default combineReducers({
     lista: feriasLista,
     item: feriasItem,
     programada: feriasProgramada,
+  }),
+  perfil: combineReducers({
+    avatar: perfilAvatar,
   }),
 });

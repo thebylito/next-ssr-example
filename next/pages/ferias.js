@@ -103,57 +103,59 @@ function Ferias() {
           <Grid xs={12} sm={7} md={8} item>
             <PaginaTitulo titulo="Minhas Férias" />
             <List>
-              {programada && (
               <Card className={classes.cardFeriasProgramadas}>
                 <Typography color="primary" align="center" variant="h4">Férias Programadas</Typography>
-                <Box display="flex" flexDirection="row" justifyContent="space-between">
-                  <Typography variant="body1">Periodo aquisitivo</Typography>
-                  <Typography align="center" variant="subtitle2">{`${formatarData(programada.dtinipaq)} - ${formatarData(programada.dtfimpaq)}`}</Typography>
-                </Box>
-                <Divider className={classes.separador} />
-                <Box display="flex" flexDirection="row" justifyContent="space-between" marginTop={1}>
-                  <Typography>Dias vencidos</Typography>
-                  <Typography align="center" variant="subtitle2">{programada.diasvencidos}</Typography>
-                </Box>
-                <Divider className={classes.separador} />
-                <Box display="flex" flexDirection="row" justifyContent="space-between" marginTop={1}>
-                  <Typography>Dias a vencer</Typography>
-                  <Typography align="center" variant="subtitle2">{programada.diasvencer}</Typography>
-                </Box>
-                <Divider className={classes.separador} />
-                <Box display="flex" justifyContent="flex-end">
-                  <Box display="flex" flexDirection="row" justifyContent="space-between" marginRight={5}>
-                    <Box display="flex" flexDirection="column" marginRight={1}>
-                      <Typography color="primary" variant="h6" align="center">Início</Typography>
-                      <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG1)}</Typography>
-                      <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG2)}</Typography>
-                      <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG3)}</Typography>
+                {programada ? (
+                  <>
+                    <Box display="flex" flexDirection="row" justifyContent="space-between">
+                      <Typography variant="body1">Periodo aquisitivo</Typography>
+                      <Typography align="center" variant="subtitle2">{`${formatarData(programada.dtinipaq)} - ${formatarData(programada.dtfimpaq)}`}</Typography>
                     </Box>
-                    <Divider className={classes.separador} orientation="vertical" />
-                  </Box>
-                  <Box display="flex" flexDirection="row" justifyContent="space-between" marginRight={5}>
-                    <Box display="flex" flexDirection="column" marginRight={1}>
-                      <Typography color="primary" variant="h6">Duração(dias)</Typography>
-                      <Typography align="right" variant="subtitle2">{programada.diasferiaS1}</Typography>
-                      <Typography align="right" variant="subtitle2">{programada.diasferiaS2}</Typography>
-                      <Typography align="right" variant="subtitle2">{programada.diasferiaS3}</Typography>
+                    <Divider className={classes.separador} />
+                    <Box display="flex" flexDirection="row" justifyContent="space-between" marginTop={1}>
+                      <Typography>Dias vencidos</Typography>
+                      <Typography align="center" variant="subtitle2">{programada.diasvencidos}</Typography>
                     </Box>
-                    <Divider className={classes.separador} orientation="vertical" />
-                  </Box>
-                  <Divider className={classes.separador} orientation="vertical" />
-                  <Box display="flex" flexDirection="row" justifyContent="space-between">
-                    <Box display="flex" flexDirection="column" marginRight={1}>
-                      <Typography color="primary" variant="h6">Abono</Typography>
-                      <Typography align="right" variant="subtitle2">{programada.diasabonO1}</Typography>
-                      <Typography align="right" variant="subtitle2">{programada.diasabonO2}</Typography>
-                      <Typography align="right" variant="subtitle2">{programada.diasabonO3}</Typography>
+                    <Divider className={classes.separador} />
+                    <Box display="flex" flexDirection="row" justifyContent="space-between" marginTop={1}>
+                      <Typography>Dias a vencer</Typography>
+                      <Typography align="center" variant="subtitle2">{programada.diasvencer}</Typography>
                     </Box>
-                    <Divider className={classes.separador} orientation="vertical" />
-                  </Box>
-
-                </Box>
+                    <Divider className={classes.separador} />
+                    <Box display="flex" justifyContent="flex-end">
+                      <Box display="flex" flexDirection="row" justifyContent="space-between" marginRight={5}>
+                        <Box display="flex" flexDirection="column" marginRight={1}>
+                          <Typography color="primary" variant="h6" align="center">Início</Typography>
+                          <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG1)}</Typography>
+                          <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG2)}</Typography>
+                          <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG3)}</Typography>
+                        </Box>
+                        <Divider className={classes.separador} orientation="vertical" />
+                      </Box>
+                      <Box display="flex" flexDirection="row" justifyContent="space-between" marginRight={5}>
+                        <Box display="flex" flexDirection="column" marginRight={1}>
+                          <Typography color="primary" variant="h6">Duração(dias)</Typography>
+                          <Typography align="right" variant="subtitle2">{programada.diasferiaS1}</Typography>
+                          <Typography align="right" variant="subtitle2">{programada.diasferiaS2}</Typography>
+                          <Typography align="right" variant="subtitle2">{programada.diasferiaS3}</Typography>
+                        </Box>
+                        <Divider className={classes.separador} orientation="vertical" />
+                      </Box>
+                      <Divider className={classes.separador} orientation="vertical" />
+                      <Box display="flex" flexDirection="row" justifyContent="space-between">
+                        <Box display="flex" flexDirection="column" marginRight={1}>
+                          <Typography color="primary" variant="h6">Abono</Typography>
+                          <Typography align="right" variant="subtitle2">{programada.diasabonO1}</Typography>
+                          <Typography align="right" variant="subtitle2">{programada.diasabonO2}</Typography>
+                          <Typography align="right" variant="subtitle2">{programada.diasabonO3}</Typography>
+                        </Box>
+                        <Divider className={classes.separador} orientation="vertical" />
+                      </Box>
+                    </Box>
+                  </>
+                ) : (<Typography align="center" variant="subtitle2">Não há férias programadas</Typography>
+                )}
               </Card>
-              )}
               {ferias.map(listItem => (
                 <ListItemFerias
                   key={listItem.id}
