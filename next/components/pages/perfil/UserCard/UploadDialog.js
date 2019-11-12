@@ -69,7 +69,6 @@ function UploadDialogModal(props) {
 UploadDialogModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  selectedValue: PropTypes.string.isRequired,
 };
 
 function UploadDialog() {
