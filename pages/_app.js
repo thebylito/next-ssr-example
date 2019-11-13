@@ -3,12 +3,8 @@ import App from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import moment from 'moment';
 import theme from '../components/theme';
-import 'moment/min/locales';
-import 'moment-immutable';
 
-moment.locale('pt-BR');
 
 export default class MyApp extends App {
   componentDidMount() {

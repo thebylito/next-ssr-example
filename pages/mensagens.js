@@ -106,4 +106,8 @@ function Mensagens() {
   );
 }
 
-export default withRedux(withAuth(Mensagens, ['usuario']));
+Mensagens.getInitialProps = async ctx => {
+  await withAuth(ctx);
+};
+
+export default withRedux(Mensagens);

@@ -31,4 +31,8 @@ function Dashboard() {
   );
 }
 
-export default withRedux(withAuth(Dashboard, ['usuario']));
+Dashboard.getInitialProps = async ctx => {
+  await withAuth(ctx);
+};
+
+export default withRedux(Dashboard);

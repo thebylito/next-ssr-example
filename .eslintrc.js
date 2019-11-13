@@ -1,24 +1,29 @@
 module.exports = {
-    "extends": "airbnb",
-    "rules": {
-      "arrow-parens": 0,
-      "react/prop-types": 0,
-      "global-require": 0,
-      "react/jsx-filename-extension": [1, {
-        "extensions": [".js", ".jsx"]
-      }],
-      "class-methods-use-this": 0,
-      "react/jsx-props-no-spreading": 0
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off"
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["./"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     },
-    globals: {
-      use: true
-    },
-    "settings": {
-      "import/resolver": {
-        "node": {
-          "paths": ["next"],
-          "extensions": [".js", ".jsx", ".ts", ".tsx"]
-        }
-      },
-    },
+  },
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true
+},
 };

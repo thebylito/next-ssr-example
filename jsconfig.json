@@ -1,13 +1,10 @@
 {
   "exclude": ["node_modules", "**/node_modules/*"],
   "compilerOptions": {
-    "baseUrl": "./next",
+    "baseUrl": "./",
     "module": "commonjs",
-    "checkJs": false,
-    "target": "esnext",
-    "jsx": "preserve"
-  },
-  "typeAcquisition": {
-    "include": ["jest"]
+    //"checkJs": false,
+    "target": "esnext"
+    //"jsx": "preserve"
   }
 }

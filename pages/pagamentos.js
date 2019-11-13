@@ -118,4 +118,8 @@ function Pagamentos() {
   );
 }
 
-export default withRedux(withAuth(Pagamentos));
+Pagamentos.getInitialProps = async ctx => {
+  await withAuth(ctx);
+};
+
+export default withRedux(Pagamentos);

@@ -186,4 +186,8 @@ function Ferias() {
   );
 }
 
-export default withRedux(withAuth(Ferias));
+Ferias.getInitialProps = async ctx => {
+  await withAuth(ctx);
+};
+
+export default withRedux(Ferias);

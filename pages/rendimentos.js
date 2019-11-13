@@ -91,19 +91,8 @@ function Rendimentos() {
   );
 }
 
-Rendimentos.getInitialProps = ({ reduxStore }) => {
-  // Tick the time once, so we'll have a
-  // valid time before first render
-  const { dispatch } = reduxStore;
-
-  const hue = reduxStore;
-  // dispatch({
-  //   type: 'TICK',
-  //   light: typeof window === 'object',
-  //   lastUpdate: Date.now(),
-  // });
-
-  return { dispatch };
+Rendimentos.getInitialProps = async ctx => {
+  await withAuth(ctx);
 };
 
-export default withRedux(withAuth(Rendimentos));
+export default withRedux(Rendimentos);

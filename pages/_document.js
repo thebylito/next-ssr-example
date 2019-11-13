@@ -1,8 +1,13 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
+import moment from 'moment';
 import theme from '../components/theme';
 
+import 'moment/min/locales';
+import 'moment-immutable';
+
+moment.updateLocale('pt-BR');
 class MyDocument extends Document {
   render() {
     return (

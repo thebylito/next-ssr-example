@@ -84,4 +84,8 @@ function Perfil() {
   );
 }
 
-export default withRedux(withAuth(Perfil));
+Perfil.getInitialProps = async ctx => {
+  await withAuth(ctx);
+};
+
+export default withRedux(Perfil);

@@ -81,5 +81,8 @@ function Detalhes() {
   );
 }
 
-Detalhes.getInitialProps = ({ query }) => ({ query });
-export default withRedux(withAuth(Detalhes));
+Detalhes.getInitialProps = async ctx => {
+  await withAuth(ctx);
+};
+
+export default withRedux(Detalhes);
