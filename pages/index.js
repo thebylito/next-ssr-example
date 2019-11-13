@@ -64,20 +64,20 @@ function LoginScreen() {
       <Head title="Acessar - Meu RH" />
 
       <main className={classes.root}>
-        <style jsx global>
-          {`
-        body {
-          position: absolute;
-          background-color: #1f96b7;
-          background-size: contain;
-          min-height: 100%;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-        }
-    `}
-        </style>
+        <div
+        style={{
+          position: 'absolute',
+          backgroundColor: '#1f96b7',
+          background: 'linear-gradient(to bottom, #86BBD8, #1f96b7, #336699)',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          backgroundSize: 'cover',
+          minHeight: '100%',
+          zIndex: -1,
+        }}
+        >
         <Box className={classes.container}>
           <Box className={classes.logoContainer}>
             <SanesulLogo width={109} height={150} />
@@ -90,6 +90,7 @@ function LoginScreen() {
             </Typography>
           </Card>
         </Box>
+        </div>
       </main>
     </>
   );
