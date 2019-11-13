@@ -88,7 +88,7 @@ function Pagamentos() {
             <List>
               {pagamentos.map(listItem => (
                 <ListItemPagamento
-                  key={listItem.id}
+                  key={`${listItem.ano}-${listItem.mes}-${listItem.semana}-${listItem.roteiro}`}
                   dados={listItem}
                   onPressItem={onPressItem}
                 />
