@@ -37,7 +37,7 @@ function Ferias() {
   });
 
   // const theme = useTheme();
-  const { ferias, feriasLoading } = useSelector(state => state.ferias.lista);
+  const { ferias, feriasLoading, meta } = useSelector(state => state.ferias.lista);
   const { data: programada } = useSelector(state => state.ferias.programada);
 
   const fetchMoreListItems = () => {
@@ -74,6 +74,8 @@ function Ferias() {
     return moment(data, 'YYYYMMDD').format('DD/MM/YYYY');
   };
 
+  const existeMaisRegistros = meta  ? meta.totalPages > meta.page: null;
+
   return (
     <>
       <style jsx global>
@@ -104,7 +106,7 @@ function Ferias() {
             <PaginaTitulo titulo="Minhas Férias" />
             <List>
               <Card className={classes.cardFeriasProgramadas}>
-                <Typography color="primary" align="center" variant="h4">Férias Programadas</Typography>
+                <Typography color="primary" align="center" variant="h5">Férias Programadas</Typography>
                 {programada ? (
                   <>
                     <Box display="flex" flexDirection="row" justifyContent="space-between">
@@ -113,7 +115,7 @@ function Ferias() {
                     </Box>
                     <Divider className={classes.separador} />
                     <Box display="flex" flexDirection="row" justifyContent="space-between" marginTop={1}>
-                      <Typography>Dias vencidos</Typography>
+                      <Typography>Saldo</Typography>
                       <Typography align="center" variant="subtitle2">{programada.diasvencidos}</Typography>
                     </Box>
                     <Divider className={classes.separador} />
@@ -123,18 +125,18 @@ function Ferias() {
                     </Box>
                     <Divider className={classes.separador} />
                     <Box display="flex" justifyContent="flex-end">
-                      <Box display="flex" flexDirection="row" justifyContent="space-between" marginRight={5}>
+                      <Box display="flex" flexDirection="row" justifyContent="space-between" marginRight={1}>
                         <Box display="flex" flexDirection="column" marginRight={1}>
-                          <Typography color="primary" variant="h6" align="center">Início</Typography>
+                          <Typography color="primary" variant="button" align="center">Início</Typography>
                           <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG1)}</Typography>
                           <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG2)}</Typography>
                           <Typography align="right" variant="subtitle2">{formatarData(programada.dtiniproG3)}</Typography>
                         </Box>
                         <Divider className={classes.separador} orientation="vertical" />
                       </Box>
-                      <Box display="flex" flexDirection="row" justifyContent="space-between" marginRight={5}>
+                      <Box display="flex" flexDirection="row" justifyContent="space-between" marginRight={1}>
                         <Box display="flex" flexDirection="column" marginRight={1}>
-                          <Typography color="primary" variant="h6">Duração(dias)</Typography>
+                          <Typography color="primary" variant="button">Duração(dias)</Typography>
                           <Typography align="right" variant="subtitle2">{programada.diasferiaS1}</Typography>
                           <Typography align="right" variant="subtitle2">{programada.diasferiaS2}</Typography>
                           <Typography align="right" variant="subtitle2">{programada.diasferiaS3}</Typography>
@@ -144,7 +146,7 @@ function Ferias() {
                       <Divider className={classes.separador} orientation="vertical" />
                       <Box display="flex" flexDirection="row" justifyContent="space-between">
                         <Box display="flex" flexDirection="column" marginRight={1}>
-                          <Typography color="primary" variant="h6">Abono</Typography>
+                          <Typography color="primary" variant="button">Abono</Typography>
                           <Typography align="right" variant="subtitle2">{programada.diasabonO1}</Typography>
                           <Typography align="right" variant="subtitle2">{programada.diasabonO2}</Typography>
                           <Typography align="right" variant="subtitle2">{programada.diasabonO3}</Typography>
@@ -164,7 +166,7 @@ function Ferias() {
                 />
               ))}
             </List>
-            {!isFetching ? (
+            {!isFetching && existeMaisRegistros ? (
               <Box textAlign="center">
                 <Button
                   variant="text"

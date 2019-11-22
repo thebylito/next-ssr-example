@@ -1,5 +1,5 @@
 import {
-  call, put, all, takeLatest,
+  call, put, all, takeLatest, select
 } from 'redux-saga/effects';
 import api from 'services/api';
 import {
@@ -12,7 +12,10 @@ import {
 
 function* getFeriasLista() {
   try {
-    yield put(FeriasProgramadaCreators.getRequest());
+    const { data: feriasProgramadas } = yield select(state=> state.ferias.programada)
+    if(!feriasProgramadas){
+      yield put(FeriasProgramadaCreators.getRequest());
+    }
     const response = yield call(api.get, 'v2/ferias/lista');
     if (response.status !== 200) {
       throw new Error(response);
