@@ -4,7 +4,7 @@ import Nav from 'components/nav';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import {
-  Grid, LinearProgress, Typography, Button,
+  Grid, LinearProgress, Typography,
 } from '@material-ui/core';
 import withRedux from 'lib/redux';
 import { Creators as FeriasItemCreators } from 'appStore/ducks/ferias/item';
@@ -13,6 +13,7 @@ import DetalhesCard from 'components/pages/ferias/DetalhesCard';
 import withAuth from 'lib/withAuth';
 import PaginaTitulo from 'components/pages/shared/PaginaTitulo';
 import moment from 'moment';
+import Scrollbar from 'react-scrollbars-custom';
 
 function Detalhes() {
   const dispatch = useDispatch();
@@ -26,9 +27,9 @@ function Detalhes() {
     dispatch(FeriasItemCreators.getRequest({ periodo }));
   }, []);
 
-  const getFeriasDownload = () => {
-    dispatch(FeriasItemCreators.getFeriasDownloadRequest({ periodo }));
-  };
+  // const getFeriasDownload = () => {
+  //   dispatch(FeriasItemCreators.getFeriasDownloadRequest({ periodo }));
+  // };
 
   const obterData = (date) => moment(date, 'YYYYMMDD').format('DD/MM/YYYY');
 
@@ -37,6 +38,12 @@ function Detalhes() {
   return (
     <>
       <Head title="Meus Detalhes" />
+      <Scrollbar
+        disableTracksWidthCompensation
+        style={{
+          width: '100%', height: '100vh',
+        }}
+      >
       <Nav />
       {loading && <LinearProgress color="primary" />}
       <PaginaTitulo titulo={`Período de férias: ${obterData(detalhes.periodoFerias.inicio)} - ${obterData(detalhes.periodoFerias.fim)}`} />
@@ -77,6 +84,7 @@ function Detalhes() {
         </Grid>
 
       </Grid>
+      </Scrollbar>
     </>
   );
 }

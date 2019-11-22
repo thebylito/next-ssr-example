@@ -13,7 +13,10 @@ import UserCard from 'components/pages/perfil/UserCard';
 import Scrollbar from 'react-scrollbars-custom';
 import PaginaTitulo from 'components/pages/shared/PaginaTitulo';
 import withAuth from 'lib/withAuth';
+import moment from 'moment';
 
+import 'moment/min/locales';
+moment.locale('pt-br');
 
 function Pagamentos() {
   const dispatch = useDispatch();
@@ -42,6 +45,7 @@ function Pagamentos() {
   }, [pagamentosLoading]);
 
   React.useEffect(() => {
+
     fetchMoreListItems();
   }, []);
 
