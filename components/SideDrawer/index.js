@@ -104,13 +104,13 @@ export default function SideDrawer() {
     >
       <List className={classes.listMenus}>
         {appPages.map((menu) => (
-          <>
-            <ListItem button key={menu.id} onClick={onLinkPress(menu.path)}>
+          <React.Fragment key={menu.id}>
+            <ListItem button onClick={onLinkPress(menu.path)}>
               <ListItemIcon>{menu.icon}</ListItemIcon>
               <ListItemText primary={menu.name} />
             </ListItem>
             {menu.id === 'home' && <Divider />}
-          </>
+          </React.Fragment>
         ))}
       </List>
       <Divider />
