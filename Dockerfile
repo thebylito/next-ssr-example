@@ -21,7 +21,7 @@
 
 # Caso seja DMZ, Build deve ser feito localmente
 ### BUILDAMOS LOCALMENTE E NO "DEPLOY" ELE E APENAS EXECUTADO
-### yarn build && tar -cvf ./deploy.tar --exclude='*.map' ./captain-definition ./dist/* ./node_modules/* ./Dockerfile
+### yarn build && tar -cvf ./deploy.tar --exclude='*.map' ./captain-definition ./*
 ### APOS criar o deploy.tar deve subir com o comando "caprover deploy -t ./deploy.tar"
 FROM node:10
 RUN mkdir /usr/src/app
