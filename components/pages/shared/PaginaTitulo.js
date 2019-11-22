@@ -5,8 +5,8 @@ function PaginaTitulo({ children, titulo }) {
   return (
     <Typography
       color="primary"
-      style={{ textTransform: 'uppercase' }}
-      variant="h3"
+      style={{ textTransform: 'uppercase', marginTop: 10 }}
+      variant="h4"
       align="center"
     >
       {children || titulo}

@@ -19,7 +19,7 @@ function ListItemFerias({ dados, onPressItem }) {
       <Card
         style={{
           padding: '15px 10px',
-          flexDirection: 'row',
+          flexDirection: 'column',
           display: 'flex',
           flex: 1,
         }}
