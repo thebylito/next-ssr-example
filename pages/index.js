@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography, Card, Box } from '@material-ui/core';
+import { Typography, Card, Box, Button } from '@material-ui/core';
 import Head from 'components/head';
 import SanesulLogo from 'components/SanesulLogo';
 import LoginForm from 'components/pages/index/LoginForm';
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   loginForm: {
     padding: '50px 20px',
     [theme.breakpoints.down('lg')]: {
-      width: '20vw',
+      width: '23vw',
     },
     [theme.breakpoints.down('md')]: {
       width: '30vw',
@@ -39,7 +39,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 function LoginScreen() {
   const authStore = useSelector(state => state.auth);
   const dispatch = useDispatch();
@@ -51,45 +50,51 @@ function LoginScreen() {
 
   React.useEffect(() => {
     const OneSignal = window.OneSignal || [];
-    OneSignal.push(() => OneSignal.init({
-      appId: '36dbc55e-d17a-45cd-854c-d2836590e2ac',
-      notifyButton: {
-        enable: true,
-      },
-    }));
+    OneSignal.push(() =>
+      OneSignal.init({
+        appId: '36dbc55e-d17a-45cd-854c-d2836590e2ac',
+        notifyButton: {
+          enable: true,
+        },
+      })
+    );
   }, []);
 
   return (
     <>
       <Head title="Acessar - Meu RH" />
-
       <main className={classes.root}>
         <div
-        style={{
-          position: 'absolute',
-          backgroundColor: '#1f96b7',
-          background: 'linear-gradient(to bottom, #86BBD8, #1f96b7, #336699)',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          backgroundSize: 'cover',
-          minHeight: '100%',
-          zIndex: -1,
-        }}
+          style={{
+            position: 'absolute',
+            backgroundColor: '#1f96b7',
+            background: 'linear-gradient(to bottom, #86BBD8, #1f96b7, #336699)',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundSize: 'cover',
+            minHeight: '100%',
+            zIndex: -1,
+          }}
         >
-        <Box className={classes.container}>
-          <Box className={classes.logoContainer}>
-            <SanesulLogo width={109} height={150} />
-            <Typography style={{ color: 'white' }} variant="h5" color="primary">Meu RH</Typography>
+          <Box className={classes.container}>
+            <Box className={classes.logoContainer}>
+              <SanesulLogo width={109} height={150} />
+              <Typography style={{ color: 'white' }} variant="h5" color="primary">
+                Meu RH
+              </Typography>
+            </Box>
+            <Card className={classes.loginForm}>
+              <LoginForm onSubmit={onSubmit} isLoading={authStore.loading} />
+              <Typography color="error" align="center">
+                {authStore.error}
+              </Typography>
+              <Typography align="center">
+                <Button>Esqueci minha senha</Button>
+              </Typography>
+            </Card>
           </Box>
-          <Card className={classes.loginForm}>
-            <LoginForm onSubmit={onSubmit} isLoading={authStore.loading} />
-            <Typography color="error" align="center">
-              {authStore.error}
-            </Typography>
-          </Card>
-        </Box>
         </div>
       </main>
     </>
