@@ -10,6 +10,7 @@ import feriasProgramada from './ferias/programada';
 import perfilAvatar from './perfil/avatar';
 import checarCpf from './redefinirSenha/checarCpf';
 import redefinirSenha from './redefinirSenha/redefinirSenha';
+import { reducer as notifications } from 'react-notification-system-redux';
 
 export default combineReducers({
   login,
@@ -31,4 +32,5 @@ export default combineReducers({
   perfil: combineReducers({
     avatar: perfilAvatar,
   }),
+  notifications,
 });

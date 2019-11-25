@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../components/theme';
-
+import NotificationContainer from 'components/NotificationContainer';
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -27,6 +27,7 @@ export default class MyApp extends App {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <Component {...pageProps} />
+          <NotificationContainer />
         </ThemeProvider>
       </>
     );
