@@ -22,9 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 const mimeTypesAceitos = ['image/png', 'image/jpeg'];
-
 
 function UploadDialogModal(props) {
   const [file, setFile] = React.useState(null);
@@ -64,11 +62,9 @@ function UploadDialogModal(props) {
       <Box className={classes.uploadContainer}>
         <div {...getRootProps()}>
           <input {...getInputProps()} />
-          <DialogTitle>
-            <Typography color="primary" variant="h6">
-              Solte ou clique aqui para carregar sua imagem
-            </Typography>
-          </DialogTitle>
+          <Typography color="primary" variant="h6" style={{ padding: 10 }}>
+            Solte ou clique aqui para carregar sua imagem
+          </Typography>
         </div>
       </Box>
       <Button onClick={onSubmit} disabled={file === null}>
@@ -96,14 +92,16 @@ function UploadDialog() {
     setOpen(false);
   };
 
-  const onImageSubmit = (file) => {
+  const onImageSubmit = file => {
     dispatch(Creators.getProfileImageUploadRequest(file));
   };
 
   return (
     <div>
       <Button onClick={handleClickOpen}>
-        <Typography color="primary" variant="subtitle2">Atualizar foto</Typography>
+        <Typography color="primary" variant="subtitle2">
+          Atualizar foto
+        </Typography>
       </Button>
       <UploadDialogModal open={open} onClose={handleClose} onImageSubmit={onImageSubmit} />
     </div>

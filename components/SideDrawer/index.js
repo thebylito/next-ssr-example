@@ -18,6 +18,7 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import MessageIcon from '@material-ui/icons/Message';
 import Router from 'next/router';
 import { Creators } from 'appStore/ducks/login';
+import Link from 'next/link';
 
 export const appPages = [
   {
@@ -104,10 +105,12 @@ export default function SideDrawer() {
       <List className={classes.listMenus}>
         {appPages.map(menu => (
           <React.Fragment key={menu.id}>
-            <ListItem button onClick={onLinkPress(menu.path)}>
-              <ListItemIcon>{menu.icon}</ListItemIcon>
-              <ListItemText primary={menu.name} />
-            </ListItem>
+            <Link href={menu.path}>
+              <ListItem button>
+                <ListItemIcon>{menu.icon}</ListItemIcon>
+                <ListItemText primary={menu.name} />
+              </ListItem>
+            </Link>
             {menu.id === 'home' && <Divider />}
           </React.Fragment>
         ))}

@@ -92,7 +92,7 @@ function LoginScreen() {
                 {authStore.error}
               </Typography>
               <Typography align="center">
-                <Link href="/recuperarSenha" prefetch>
+                <Link href="/recuperarSenha">
                   <Button>Esqueci minha senha</Button>
                 </Link>
               </Typography>

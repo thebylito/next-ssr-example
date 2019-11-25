@@ -1,13 +1,16 @@
 {
-  "presets": ["next/babel"],
+  "presets": ["next/babel", "@babel/preset-flow"],
   "plugins": [
-    ["styled-components", { "ssr": true }],
+    ["styled-components", {
+      "ssr": true
+    }],
     [
       "module-resolver",
       {
         "root": ["./"]
       }
     ],
-    "@babel/plugin-proposal-optional-chaining"
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-export-default-from"
   ]
 }

@@ -29,7 +29,6 @@ const Nav = ({ exibirBotoes = true }) => {
       anchorEl={anchorEl}
       id={menuId}
       keepMounted
-      anchorOrigin={{ vertical: 'center', horizontal: 'left' }}
       transformOrigin={{ vertical: 'center', horizontal: 'left' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
