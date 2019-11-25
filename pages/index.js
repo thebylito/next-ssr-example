@@ -4,9 +4,10 @@ import { Typography, Card, Box, Button } from '@material-ui/core';
 import Head from 'components/head';
 import SanesulLogo from 'components/SanesulLogo';
 import LoginForm from 'components/pages/index/LoginForm';
-import { Creators as AuthCreators } from 'appStore/ducks/auth';
+import { Creators as LoginCreators } from 'appStore/ducks/login';
 import withRedux from 'lib/redux';
 import { makeStyles } from '@material-ui/styles';
+import Link from 'next/link';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -40,12 +41,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function LoginScreen() {
-  const authStore = useSelector(state => state.auth);
+  const authStore = useSelector(state => state.login);
   const dispatch = useDispatch();
   const classes = useStyles();
 
   const onSubmit = ({ matricula, senha }) => {
-    dispatch(AuthCreators.getLoginRequest({ login: matricula, senha }));
+    dispatch(LoginCreators.getLoginRequest({ login: matricula, senha }));
   };
 
   React.useEffect(() => {
@@ -91,7 +92,9 @@ function LoginScreen() {
                 {authStore.error}
               </Typography>
               <Typography align="center">
-                <Button>Esqueci minha senha</Button>
+                <Link href="/recuperarSenha" prefetch>
+                  <Button>Esqueci minha senha</Button>
+                </Link>
               </Typography>
             </Card>
           </Box>

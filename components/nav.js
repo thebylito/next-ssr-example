@@ -1,11 +1,9 @@
 import React from 'react';
-import {
-  AppBar, Box, Hidden, IconButton, Grid, Menu, MenuItem,
-} from '@material-ui/core';
+import { AppBar, Box, Hidden, IconButton, Grid, Menu, MenuItem } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import Toolbar from '@material-ui/core/Toolbar';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
-import { Creators } from 'appStore/ducks/auth';
+import { Creators } from 'appStore/ducks/login';
 import SideDrawer from './SideDrawer';
 import UserAvatar from './pages/dashboard/UserAvatar';
 import HorizontalMenu from './HorizontalMenu';
@@ -16,7 +14,6 @@ const Nav = ({ exibirBotoes = true }) => {
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
-
 
   const onLogout = () => {
     dispatch(Creators.getLogoutRequest());
@@ -59,14 +56,14 @@ const Nav = ({ exibirBotoes = true }) => {
             </Grid>
             <Grid item>
               {exibirBotoes && (
-              <Box>
-                <IconButton
-                  aria-controls="primary-search-account-menu"
-                  onClick={handleProfileMenuOpen}
-                >
-                  <UserAvatar size={35} />
-                </IconButton>
-              </Box>
+                <Box>
+                  <IconButton
+                    aria-controls="primary-search-account-menu"
+                    onClick={handleProfileMenuOpen}
+                  >
+                    <UserAvatar size={35} />
+                  </IconButton>
+                </Box>
               )}
             </Grid>
           </Grid>

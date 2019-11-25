@@ -17,7 +17,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import MessageIcon from '@material-ui/icons/Message';
 import Router from 'next/router';
-import { Creators } from 'appStore/ducks/auth';
+import { Creators } from 'appStore/ducks/login';
 
 export const appPages = [
   {
@@ -52,7 +52,6 @@ export const appPages = [
   },
 ];
 
-
 const useStyles = makeStyles({
   list: {
     display: 'flex',
@@ -85,7 +84,7 @@ export default function SideDrawer() {
     setState({ ...state, [side]: open });
   };
 
-  const onLinkPress = (path) => () => {
+  const onLinkPress = path => () => {
     Router.push({
       pathname: path,
     });
@@ -103,7 +102,7 @@ export default function SideDrawer() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List className={classes.listMenus}>
-        {appPages.map((menu) => (
+        {appPages.map(menu => (
           <React.Fragment key={menu.id}>
             <ListItem button onClick={onLinkPress(menu.path)}>
               <ListItemIcon>{menu.icon}</ListItemIcon>
@@ -115,7 +114,9 @@ export default function SideDrawer() {
       </List>
       <Divider />
       <ListItem button onClick={onLogout}>
-        <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+        <ListItemIcon>
+          <ExitToAppIcon />
+        </ListItemIcon>
         <ListItemText primary="Sair" />
       </ListItem>
     </div>

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import login from './login';
 import auth from './auth';
 import pagamento from './pagamento';
 import rendimento from './rendimento';
@@ -7,11 +8,18 @@ import feriasLista from './ferias/lista';
 import feriasItem from './ferias/item';
 import feriasProgramada from './ferias/programada';
 import perfilAvatar from './perfil/avatar';
+import checarCpf from './redefinirSenha/checarCpf';
+import redefinirSenha from './redefinirSenha/redefinirSenha';
 
 export default combineReducers({
+  login,
   auth,
   pagamento,
   rendimento,
+  redefinirSenha: combineReducers({
+    checarCpf,
+    redefinirSenha,
+  }),
   mensagem: combineReducers({
     lista: mensagemLista,
   }),
