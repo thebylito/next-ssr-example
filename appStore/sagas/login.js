@@ -1,11 +1,13 @@
-import { call, put, all, takeLatest, select } from 'redux-saga/effects';
-import { apiUtils } from 'utils/apiUtils';
+import { call, put, all, takeLatest } from 'redux-saga/effects';
 import Router from 'next/router';
 // import { Creators as ProfileCreators } from '../ducks/perfil';
 import { setCookie, removeCookie } from 'utils/cookie';
 import { Creators as AuthCreators } from '../ducks/auth';
 import { Creators as LoginCreators, Types as LoginTypes } from '../ducks/login';
 import api from '../../services/api';
+import interceptResponse from 'utils/request/interceptResponse';
+import interceptError from 'utils/request/interceptError';
+// import Notifications from 'react-notification-system-redux';
 
 function* getLogin({ payload }) {
   try {
@@ -15,11 +17,14 @@ function* getLogin({ payload }) {
       senha,
       // uniqueId: DeviceInfo.getUniqueID(),
     });
-    yield apiUtils.sagaInterceptResponse(response);
+    yield interceptResponse(response);
 
     const { data } = response;
     yield call(setCookie, 'auth', data.token);
     yield put(LoginCreators.getLoginSuccess());
+    // yield put(
+    //   Notifications.success({ title: 'Autenticado com sucesso', message: 'Redirecionando...' })
+    // );
     yield put(
       AuthCreators.getAuthSuccess({
         funcionario: data.funcionario,
@@ -28,7 +33,7 @@ function* getLogin({ payload }) {
     );
     yield call(Router.push, { pathname: '/dashboard' });
   } catch (err) {
-    yield apiUtils.sagaInterceptError(AuthCreators.getLoginFailure, err);
+    yield interceptError(LoginCreators.getLoginFailure, err);
   }
 }
 

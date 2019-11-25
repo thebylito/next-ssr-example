@@ -1,7 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  Grid, Hidden, Typography, Card, CardContent, List, Box, LinearProgress, Divider,
+  Grid,
+  Hidden,
+  Typography,
+  Card,
+  CardContent,
+  List,
+  Box,
+  LinearProgress,
+  Divider,
 } from '@material-ui/core';
 import withRedux from 'lib/redux';
 import Head from 'components/head';
@@ -35,15 +43,15 @@ function Mensagens() {
 
   React.useEffect(() => {
     dispatch(Creators.getListRequest());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
       <style jsx global>
         {`
-        body {
-          background-color: #1c9aba14;
-        }
+          body {
+            background-color: #1c9aba14;
+          }
         `}
       </style>
       <Head title="Minhas mensagens" />
@@ -59,14 +67,17 @@ function Mensagens() {
           <PaginaTitulo titulo="Minhas Mensagens" />
           <Scrollbar style={{ width: '100%', height: '86vh' }}>
             <List>
+              {mensagens.length === 0 && (
+                <Box>
+                  <Typography>Não há mensagens para você no momento.</Typography>
+                </Box>
+              )}
               {mensagens.map(mensagem => {
                 const dataHoraEnvio = moment(mensagem.dataHoraEnvio);
                 return (
                   <Card key={mensagem.id} className={classes.card}>
                     <CardContent>
-                      <Typography variant="h6">
-                        {mensagem.titulo}
-                      </Typography>
+                      <Typography variant="h6">{mensagem.titulo}</Typography>
                       <Typography variant="body2" component="p" style={{ marginTop: 10 }}>
                         {mensagem.mensagem}
                       </Typography>
@@ -83,14 +94,28 @@ function Mensagens() {
                           <Typography variant="body1" style={{ textTransform: 'uppercase' }}>
                             {mensagem.usuarioOrigem.nome}
                           </Typography>
-                          <Typography color="textSecondary" variant="caption" style={{ textTransform: 'uppercase' }}>
+                          <Typography
+                            color="textSecondary"
+                            variant="caption"
+                            style={{ textTransform: 'uppercase' }}
+                          >
                             {mensagem.usuarioOrigem.cargo_descricao}
                           </Typography>
-                          <Typography color="textSecondary" variant="caption" style={{ textTransform: 'uppercase' }}>
+                          <Typography
+                            color="textSecondary"
+                            variant="caption"
+                            style={{ textTransform: 'uppercase' }}
+                          >
                             {mensagem.usuarioOrigem.gerencia_nome}
                           </Typography>
-                          <Typography color="textSecondary" variant="caption" style={{ textTransform: 'uppercase' }}>
-                            {`${dataHoraEnvio.format('DD/MM/YYYY HH:mm')} - ${dataHoraEnvio.fromNow()}`}
+                          <Typography
+                            color="textSecondary"
+                            variant="caption"
+                            style={{ textTransform: 'uppercase' }}
+                          >
+                            {`${dataHoraEnvio.format(
+                              'DD/MM/YYYY HH:mm'
+                            )} - ${dataHoraEnvio.fromNow()}`}
                           </Typography>
                         </Box>
                       </Box>
