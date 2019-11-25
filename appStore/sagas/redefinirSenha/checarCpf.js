@@ -3,19 +3,22 @@ import api from 'services/api';
 import {
   Creators as ChecarCpfCreators,
   Types as ChecarCpfTypes,
-} from 'store/ducks/redefinirSenha/checarCpf';
-import sagaInterceptError from 'utils/sagaInterceptError';
+} from 'appStore/ducks/redefinirSenha/checarCpf';
+import interceptError from 'utils/request/interceptError';
+import interceptResponse from 'utils/request/interceptResponse';
+import Notifications from 'react-notification-system-redux';
 
 function* getChecarCpf({ payload }) {
   try {
     const { cpf } = payload;
     const response = yield call(api.get, `/conta/checarcpf?cpf=${cpf}`);
-    if (response.status !== 200) {
-      throw response;
-    }
+    yield interceptResponse(response);
     yield put(ChecarCpfCreators.getCpfExistsSuccess());
   } catch (err) {
-    yield sagaInterceptError(ChecarCpfCreators.getCpfExistsFailure, err);
+    yield interceptError(ChecarCpfCreators.getCpfExistsFailure, err);
+    yield put(
+      Notifications.warning({ title: 'OPS...', message: 'CPF incorreto, insira novamente.' })
+    );
   }
 }
 

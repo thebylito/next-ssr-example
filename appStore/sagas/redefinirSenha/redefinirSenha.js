@@ -3,9 +3,10 @@ import api from 'services/api';
 import {
   Creators as RedefinirSenhaCreators,
   Types as RedefinirSenhaTypes,
-} from 'store/ducks/redefinirSenha/redefinirSenha';
-import sagaInterceptError from 'utils/sagaInterceptError';
-import { goResetPasswordSuccessScreen } from 'appNavigation/nonAuthStack';
+} from 'appStore/ducks/redefinirSenha/redefinirSenha';
+import { Creators as LoginCreators } from 'appStore/ducks/login';
+import sagaInterceptError from 'utils/request/interceptError';
+import interceptResponse from 'utils/request/interceptResponse';
 
 function* getRedefinirSenha({ payload }) {
   try {
@@ -15,11 +16,9 @@ function* getRedefinirSenha({ payload }) {
       matricula,
       senha,
     });
-    if (response.status !== 200) {
-      throw response;
-    }
+    interceptResponse(response);
     yield put(RedefinirSenhaCreators.getRedefinirSenhaSuccess());
-    yield goResetPasswordSuccessScreen();
+    yield put(LoginCreators.getLoginRequest({ login: matricula, senha }));
   } catch (err) {
     yield sagaInterceptError(RedefinirSenhaCreators.getRedefinirSenhaFailure, err);
   }
