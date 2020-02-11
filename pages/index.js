@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Card, Box, Button } from '@material-ui/core';
 import Head from 'components/head';
-import SanesulLogo from 'components/SanesulLogo';
 import LoginForm from 'components/pages/index/LoginForm';
 import { Creators as LoginCreators } from 'appStore/ducks/login';
 import withRedux from 'lib/redux';
@@ -41,25 +40,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function LoginScreen() {
-  const authStore = useSelector(state => state.login);
-  const dispatch = useDispatch();
+  //const authStore = useSelector(state => state.login);
+  //const dispatch = useDispatch();
   const classes = useStyles();
 
-  const onSubmit = ({ matricula, senha }) => {
-    dispatch(LoginCreators.getLoginRequest({ login: matricula, senha }));
-  };
-
-  React.useEffect(() => {
-    const OneSignal = window.OneSignal || [];
-    OneSignal.push(() =>
-      OneSignal.init({
-        appId: '36dbc55e-d17a-45cd-854c-d2836590e2ac',
-        notifyButton: {
-          enable: true,
-        },
-      })
-    );
-  }, []);
+  // const onSubmit = ({ matricula, senha }) => {
+  //   dispatch(LoginCreators.getLoginRequest({ login: matricula, senha }));
+  // };
 
   return (
     <>
@@ -81,16 +68,15 @@ function LoginScreen() {
         >
           <Box className={classes.container}>
             <Box className={classes.logoContainer}>
-              <SanesulLogo width={109} height={150} />
               <Typography style={{ color: 'white' }} variant="h5" color="primary">
                 Meu RH
               </Typography>
             </Box>
             <Card className={classes.loginForm}>
-              <LoginForm onSubmit={onSubmit} isLoading={authStore.loading} />
-              <Typography color="error" align="center">
+              <LoginForm onSubmit={() => {}} isLoading={false} />
+              {/* <Typography color="error" align="center">
                 {authStore.error}
-              </Typography>
+              </Typography> */}
               <Typography align="center">
                 <Link href="/recuperarSenha">
                   <Button>Esqueci minha senha</Button>
@@ -104,4 +90,4 @@ function LoginScreen() {
   );
 }
 
-export default withRedux(LoginScreen);
+export default withRedux(LoginScreen, { ssr: true });
