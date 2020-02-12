@@ -1,12 +1,11 @@
 export const Types = {
-  GET_REQUEST: 'login/GET_REQUEST',
-  GET_SUCCESS: 'login/GET_SUCCESS',
-  GET_FAILURE: 'login/GET_FAILURE',
-
-  GET_LOGOUT_REQUEST: 'login/GET_LOGOUT_REQUEST',
+  GET_REQUEST: 'users/GET_REQUEST',
+  GET_SUCCESS: 'users/GET_SUCCESS',
+  GET_FAILURE: 'users/GET_FAILURE',
 };
 
 const initialState = {
+  users: [],
   loading: false,
   error: null,
 };
@@ -17,8 +16,10 @@ export default function(state = initialState, action) {
       return { ...state, loading: true, error: null };
     case Types.GET_SUCCESS:
       return {
+        ...state,
         loading: false,
         error: null,
+        users: action.payload.users,
       };
     case Types.GET_FAILURE:
       return { ...state, loading: false, error: action.payload };
@@ -28,18 +29,16 @@ export default function(state = initialState, action) {
 }
 
 export const Creators = {
-  getLoginRequest: ({ email, password }) => ({
+  getUsersRequest: page => ({
     type: Types.GET_REQUEST,
-    payload: { email, password },
+    payload: { page },
   }),
-  getLoginSuccess: () => ({
+  getUsersSuccess: users => ({
     type: Types.GET_SUCCESS,
+    payload: { users },
   }),
-  getLoginFailure: error => ({
+  getUsersFailure: error => ({
     type: Types.GET_FAILURE,
     payload: error,
-  }),
-  getLogoutRequest: () => ({
-    type: Types.GET_LOGOUT_REQUEST,
   }),
 };

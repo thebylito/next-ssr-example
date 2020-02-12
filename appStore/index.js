@@ -25,8 +25,8 @@ const compose = dev
   ? composeWithDevTools(applyMiddleware(...middlewares))
   : applyMiddleware(...middlewares);
 
-export default () => {
-  const store = createStore(persistedReducer, {}, compose);
+export default initialState => {
+  const store = createStore(persistedReducer, initialState, compose);
   const persistor = persistStore(store);
   sagaMiddleware.run(rootSaga);
   return { store, persistor };

@@ -1,23 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Avatar } from '@material-ui/core';
-import withRedux from 'lib/redux';
-import { apiUrl } from 'services/api';
+import { Avatar, type AvatarProps } from '@material-ui/core';
 
-const UserAvatar = ({ size = 100, matricula = null, source = null }) => {
-  const { data } = useSelector(state => state.auth);
-  const matriculaParaAvatar = matricula || data.matricula;
-  const src = source || `${apiUrl}Usuario/foto/?login=${matriculaParaAvatar}`;
+const UserAvatar = ({ size = 100, ...props }: AvatarProps) => {
   return (
     <Avatar
-      alt={data.nome}
+      alt={'avatar'}
       style={{
         width: size,
         height: size,
       }}
-      src={src}
+      {...props}
     />
   );
 };
 
-export default withRedux(UserAvatar);
+export default UserAvatar;

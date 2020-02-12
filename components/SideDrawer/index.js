@@ -10,12 +10,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import FlightIcon from '@material-ui/icons/Flight';
 
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import MessageIcon from '@material-ui/icons/Message';
 import Router from 'next/router';
 import { Creators } from 'appStore/ducks/login';
 import Link from 'next/link';
@@ -28,28 +25,10 @@ export const appPages = [
     icon: <HomeIcon />,
   },
   {
-    id: 'pagamentos',
-    name: 'Pagamentos',
-    path: '/pagamentos',
+    id: 'users',
+    name: 'Usuarios',
+    path: '/users',
     icon: <AccountBalanceWalletIcon />,
-  },
-  {
-    id: 'ferias',
-    name: 'Férias',
-    path: '/ferias',
-    icon: <FlightIcon />,
-  },
-  {
-    id: 'rendimentos',
-    name: 'Rendimentos',
-    path: '/rendimentos',
-    icon: <BarChartIcon />,
-  },
-  {
-    id: 'messages',
-    name: 'Mensagens',
-    path: '/mensagens',
-    icon: <MessageIcon />,
   },
 ];
 

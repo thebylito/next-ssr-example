@@ -5,15 +5,13 @@ import { Button, CircularProgress } from '@material-ui/core';
 import CustomTextField from '../../form/CustomTextField';
 
 const initialValues = {
-  matricula: '',
-  senha: '',
+  email: 'eve.holt@reqres.in',
+  password: 'cityslicka',
 };
 
 const formSchema = Yup.object().shape({
-  matricula: Yup.string()
-    .required('Obrigatório'),
-  senha: Yup.string()
-    .required('Obrigatório'),
+  email: Yup.string().required('Obrigatório'),
+  password: Yup.string().required('Obrigatório'),
 });
 
 const LoginForm = ({ onSubmit, isLoading }) => (
@@ -21,19 +19,10 @@ const LoginForm = ({ onSubmit, isLoading }) => (
     {({ handleSubmit }) => (
       <Form style={{ display: 'flex', alignContent: 'center', flexDirection: 'column' }}>
         <div>
-          <Field
-            name="matricula"
-            component={CustomTextField}
-            label="Matricula"
-          />
+          <Field name="email" component={CustomTextField} label="E-Mail" />
         </div>
         <div style={{ marginTop: 12 }}>
-          <Field
-            name="senha"
-            component={CustomTextField}
-            label="Senha"
-            type="password"
-          />
+          <Field name="password" component={CustomTextField} label="Password" type="password" />
         </div>
         <Button
           type="submit"

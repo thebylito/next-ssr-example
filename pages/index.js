@@ -40,51 +40,32 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function LoginScreen() {
-  //const authStore = useSelector(state => state.login);
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const classes = useStyles();
 
-  // const onSubmit = ({ matricula, senha }) => {
-  //   dispatch(LoginCreators.getLoginRequest({ login: matricula, senha }));
-  // };
+  const onSubmit = ({ email, password }) => {
+    dispatch(LoginCreators.getLoginRequest({ email, password }));
+  };
 
   return (
     <>
       <Head title="Acessar - Meu RH" />
       <main className={classes.root}>
-        <div
-          style={{
-            position: 'absolute',
-            backgroundColor: '#1f96b7',
-            background: 'linear-gradient(to bottom, #86BBD8, #1f96b7, #336699)',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            backgroundSize: 'cover',
-            minHeight: '100%',
-            zIndex: -1,
-          }}
-        >
-          <Box className={classes.container}>
-            <Box className={classes.logoContainer}>
-              <Typography style={{ color: 'white' }} variant="h5" color="primary">
-                Meu RH
-              </Typography>
-            </Box>
-            <Card className={classes.loginForm}>
-              <LoginForm onSubmit={() => {}} isLoading={false} />
-              {/* <Typography color="error" align="center">
-                {authStore.error}
-              </Typography> */}
-              <Typography align="center">
-                <Link href="/recuperarSenha">
-                  <Button>Esqueci minha senha</Button>
-                </Link>
-              </Typography>
-            </Card>
+        <Box className={classes.container}>
+          <Box className={classes.logoContainer}>
+            <Typography style={{ color: 'white' }} variant="h5" color="primary">
+              Meu RH
+            </Typography>
           </Box>
-        </div>
+          <Card className={classes.loginForm}>
+            <LoginForm onSubmit={onSubmit} isLoading={false} />
+            <Typography align="center">
+              <Link href="/recuperarSenha">
+                <Button>Esqueci minha senha</Button>
+              </Link>
+            </Typography>
+          </Card>
+        </Box>
       </main>
     </>
   );

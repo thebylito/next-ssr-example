@@ -60,7 +60,10 @@ const Nav = ({ exibirBotoes = true }) => {
                     aria-controls="primary-search-account-menu"
                     onClick={handleProfileMenuOpen}
                   >
-                    <UserAvatar size={35} />
+                    <UserAvatar
+                      size={35}
+                      src="https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
+                    />
                   </IconButton>
                 </Box>
               )}

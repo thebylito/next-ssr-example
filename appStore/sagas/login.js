@@ -10,12 +10,12 @@ import interceptError from 'utils/request/interceptError';
 // import Notifications from 'react-notification-system-redux';
 
 function* getLogin({ payload }) {
+  console.log({ payload });
   try {
-    const { login, senha } = payload;
-    const response = yield call(api.post, '/usuario/autenticar', {
-      login,
-      senha,
-      // uniqueId: DeviceInfo.getUniqueID(),
+    const { email, password } = payload;
+    const response = yield call(api.post, '/login', {
+      email,
+      password,
     });
     yield interceptResponse(response);
 
@@ -25,12 +25,6 @@ function* getLogin({ payload }) {
     // yield put(
     //   Notifications.success({ title: 'Autenticado com sucesso', message: 'Redirecionando...' })
     // );
-    yield put(
-      AuthCreators.getAuthSuccess({
-        funcionario: data.funcionario,
-        token: data.token,
-      })
-    );
     yield call(Router.push, { pathname: '/dashboard' });
   } catch (err) {
     yield interceptError(LoginCreators.getLoginFailure, err);

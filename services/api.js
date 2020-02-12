@@ -1,8 +1,7 @@
 import { create } from 'apisauce';
 
-export const apiUrl = process.env.NODE_ENV === 'production'
-  ? 'http://meurh.sanesul.ms.gov.br/api/'
-  : 'http://localhost:30000/api/';
+export const apiUrl =
+  process.env.NODE_ENV === 'production' ? 'https://reqres.in/api' : 'https://reqres.in/api';
 
 const api = create({
   baseURL: apiUrl,
@@ -11,9 +10,4 @@ const api = create({
   },
 });
 
-const debugApi = create({
-  baseURL: 'http://applogs.appdev.sanesul.ms.gov.br/api',
-});
-
 export default api;
-export { debugApi };

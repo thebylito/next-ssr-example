@@ -7,7 +7,6 @@ import { MenuItem, Typography } from '@material-ui/core';
 import Router from 'next/router';
 import { appPages } from 'components/SideDrawer';
 
-
 const useStyles = makeStyles({
   list: {
     display: 'flex',
@@ -34,13 +33,12 @@ const useStyles = makeStyles({
     color: 'white',
     fontSize: 'large',
   },
-
 });
 
 export default function HorizontalMenu() {
   const classes = useStyles();
 
-  const onLinkPress = (path) => () => {
+  const onLinkPress = path => () => {
     Router.push({
       pathname: path,
     });
@@ -48,7 +46,7 @@ export default function HorizontalMenu() {
 
   return (
     <List className={classes.listMenus}>
-      {appPages.map((menu) => (
+      {appPages.map(menu => (
         <MenuItem
           className={classes.menuItem}
           button
